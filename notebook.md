@@ -14,7 +14,7 @@ Table of contents are generated using a VSCode extension called
 "Markdown All In One." Very useful tool.
 
 # 10/13/2024 - 2pm - Working on and finishing hw1
-- Setup using jupyter notebook
+- Setup using a Jupyter notebook
 - Installed scipy, sounddevice, and libportaudio2
 - set timespace variable t
   - from 0 to 1

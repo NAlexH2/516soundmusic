@@ -23,6 +23,12 @@ Table of contents are generated using a VSCode extension called
 - Convert to 16 bit signed ints (`sine16 = np.int16(sine_wave * max16)`)
 - Write to `not-clipped.wav` using `scipy.io.wavfile.write`
 - Here is a screenshot of what the `non-clipped.wav` looks like:
+![](code/hw1-clipped/hw1assets/notclipped.png)
+- Using `numpy.clip(sine16//2, -8192, 8192)` you can quickly create a 
+clipped version. That looks like this and matches the assignment:
+![](code/hw1-clipped/hw1assets/clipped.png)
+- If need be, I can make this into a quick and simple python script, but I
+am using a python `venv` and Jupyter notebook with a `requirements.txt`
 
 # 10/13/2024 - 1:30pm - Saying "Hi"
 - Just said "Hi". I'm not quite sure what to expect from this course 

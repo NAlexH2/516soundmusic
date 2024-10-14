@@ -1,3 +1,4 @@
+# HW1 - Clipped
 - Setup using a Jupyter notebook.
 - Installed scipy, sounddevice, and libportaudio2.
 - set timespace variable t.

@@ -9,5 +9,5 @@
 ## Links
 ### Link to [notebook.md](notebook.md)
 
-### Link to [HW1]([](code/hw1-clipped/))
+### Link to [HW1](code/hw1-clipped/)
 

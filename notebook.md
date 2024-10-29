@@ -1,7 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
-- [10/29/2024 - 8am - Setting up hw2](#10292024---8am---setting-up-hw2)
+- [10/29/2024 - HW2 Start](#10292024---hw2-start)
 - [10/15/2024 - 3pm - Watching recorded lectures](#10152024---3pm---watching-recorded-lectures)
   - [Musical Notes Lecture](#musical-notes-lecture)
   - [FIR Filters (Finite Impulse Response Filters)](#fir-filters-finite-impulse-response-filters)
@@ -22,8 +22,10 @@ Table of contents are generated using a VSCode extension called
 "Markdown All In One." Very useful tool.
 
 
-# 10/29/2024 - 8am - Setting up hw2
+# 10/29/2024 - HW2 Start
 - Setup Jupyter notebook
+- Downloaded and added collectathon from class github repo added to this repo
+- See HW2 for more details regarding the homework and what was done.
 
 # 10/15/2024 - 3pm - Watching recorded lectures
 ## Musical Notes Lecture

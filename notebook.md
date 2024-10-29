@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [10/29/2024 - 8am - Setting up hw2](#10292024---8am---setting-up-hw2)
 - [10/15/2024 - 3pm - Watching recorded lectures](#10152024---3pm---watching-recorded-lectures)
   - [Musical Notes Lecture](#musical-notes-lecture)
   - [FIR Filters (Finite Impulse Response Filters)](#fir-filters-finite-impulse-response-filters)
@@ -19,6 +20,10 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+
+# 10/29/2024 - 8am - Setting up hw2
+- Setup Jupyter notebook
 
 # 10/15/2024 - 3pm - Watching recorded lectures
 ## Musical Notes Lecture

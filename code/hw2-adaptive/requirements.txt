@@ -1,3 +1,4 @@
 scipy
 sounddevice
 numpy
+librosa

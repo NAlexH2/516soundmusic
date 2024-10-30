@@ -25,7 +25,8 @@ Table of contents are generated using a VSCode extension called
 # 10/29/2024 - HW2 Start
 - Setup Jupyter notebook
 - Downloaded and added collectathon from class github repo added to this repo
-- See HW2 for more details regarding the homework and what was done.
+- Made nearly 0 progress on figuring out the assignment.
+- Need to ask for direct assistance soon.
 
 # 10/15/2024 - 3pm - Watching recorded lectures
 ## Musical Notes Lecture

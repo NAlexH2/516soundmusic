@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/2/2024 - HW2 Continued](#1122024---hw2-continued)
 - [10/29/2024 - HW2 Start](#10292024---hw2-start)
 - [10/15/2024 - 3pm - Watching recorded lectures](#10152024---3pm---watching-recorded-lectures)
   - [Musical Notes Lecture](#musical-notes-lecture)
@@ -21,6 +22,14 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
+
+# 11/2/2024 - HW2 Continued
+- Referencing the work I did with Bart on 10/31/24, 
+I'm going to continue to work on and play with the 
+current portfolio objective (hw2-adaptive)
+- Adapted and utilized ideas from zulip to produce audible files 
+that can be played back and analyzed. See hw2 readme for more details
+- Performed more analysis on the data and files.
 
 # 10/29/2024 - HW2 Start
 - Setup Jupyter notebook

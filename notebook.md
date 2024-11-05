@@ -39,7 +39,8 @@ accept a file. Everything will be explained in line.
 I'm going to continue to work on and play with the 
 current portfolio objective (hw2-adaptive)
 - Adapted and utilized ideas from zulip to produce audible files 
-that can be played back and analyzed. See hw2 readme for more details
+that can be played back and analyzed. 
+[See hw2 readme for more details](./code/hw2-adaptive/README.md)
 - Performed more analysis on the data and files.
 
 # 10/29/2024 - HW2 Start

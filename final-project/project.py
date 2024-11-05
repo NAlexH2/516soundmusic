@@ -5,8 +5,11 @@ import matplotlib
 from scipy import fft
 
 
-# This project is going to be a tuner with several options.
-# First is automatic detection.
+# This project is going to be a tuner with several options. Specifically, for a
+# guitar.
+
+# First is automatic detection. FFT and analyzing peak freqs for the value
+# received, and detecting it's closest value.
 
 # Second is to generate a standing wave of specific frequencies
 

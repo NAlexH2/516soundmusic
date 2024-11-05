@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
 - [11/2/2024 - HW2 Continued](#1122024---hw2-continued)
 - [10/29/2024 - HW2 Start](#10292024---hw2-start)
 - [10/15/2024 - 3pm - Watching recorded lectures](#10152024---3pm---watching-recorded-lectures)
@@ -22,6 +23,16 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
+# 11/5/24 11:30AM - Starting final project/Laying out plans
+- Made notes to myself in code of what I would like to do. Specifically around 
+what kind of tuner, and the options the user has. 
+  - Do they want automatic detection?
+  - Maybe someone would like to try and tune based off a standing wave?
+  - Maybe they want to pick which note they are trying to specifically measure
+    and give a approximate ratio/points value of how close/far off they are.
+- Gave just some silly filler code to test with the current venv.
+- This project won't accept and command line args since there's no reason to 
+accept a file. Everything will be explained in line.
 
 # 11/2/2024 - HW2 Continued
 - Referencing the work I did with Bart on 10/31/24, 

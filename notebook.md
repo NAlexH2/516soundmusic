@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/7/24 2:00PM - Final Project Work](#11724-200pm---final-project-work)
 - [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
 - [11/2/2024 - HW2 Continued](#1122024---hw2-continued)
 - [10/29/2024 - HW2 Start](#10292024---hw2-start)
@@ -22,6 +23,37 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# 11/7/24 2:00PM - Final Project Work
+- Adjust notes to self
+- Added 3 classes to build off of so code is easier to parse
+- Worked on the standing wave version. Would like to have a fancy menu to
+toggle options on, off, or switch between notes. Would like to have
+  - Would like to write this menu once and use in both the places where user
+  has a menu to interact with.
+  - Though, I recognize I'll probably have to write two different versions of it.
+- Worked on menu ensuring that flows correctly and has correct prompts.
+- Generated standing wave frequencies, tested each to verify sound is working.
+  - Tested against a tuner on my phone to verify as well. Sanity check.
+  - The tuner says things are right, but I am not musical and so I have doubts.
+  - Did a bit of reading and found that adding harmonics can help. It did! My 
+  standing wave of E2 sounds very close to a guitar. Now to repeat it for the 
+  other notes for better pitch matching.
+  - Had to fight with E4 though. That was hard to pitch match because of 
+  **frequency aliasing problem between E4 and D3**. The tuner I was using was 
+  detecting D3 when it was supposed to be E4. Adding and tweaking some 
+  harmonics based on logic helped out a lot.
+  - Also played each with my guitar and they sound REALLY close too! I call 
+  this a part of the program a huge success!
+- I tried using curses to create an interactive menu, but I need to do some work 
+outside of this project to better understand how that works. So each one will 
+have to be different.
+- Using match/case statements because they are easier to read code wise.
+  - YOU NEED PYTHON 3.10 OR NEWER!!!!!!
+- Overall, this is a good place to stop. The Standing wave sounds nice. Given 
+  enough time, I might make the standing waves sound *more* like a guitar. It 
+  doesn't seem like it would be that difficult and I previously found a 
+  resource that goes over this too.
 
 # 11/5/24 11:30AM - Starting final project/Laying out plans
 - Made notes to myself in code of what I would like to do. Specifically around 

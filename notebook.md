@@ -1,7 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
-- [11/7/24 2:00PM - Final Project Work](#11724-200pm---final-project-work)
+- [11/7/24 11:30PM - 5:00PM - Final Project Work](#11724-1130pm---500pm---final-project-work)
 - [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
 - [11/2/2024 - HW2 Continued](#1122024---hw2-continued)
 - [10/29/2024 - HW2 Start](#10292024---hw2-start)
@@ -24,7 +24,7 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
-# 11/7/24 2:00PM - Final Project Work
+# 11/7/24 11:30PM - 5:00PM - Final Project Work
 - Adjust notes to self
 - Added 3 classes to build off of so code is easier to parse
 - Worked on the standing wave version. Would like to have a fancy menu to

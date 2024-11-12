@@ -67,15 +67,15 @@ class StandingWave:
                     case 1:
                         sd.play(data=self.E2, samplerate=SAMPLE, loop=True)
                     case 2:
-                        sd.play(data=self.A2, samplerate=SAMPLE)
+                        sd.play(data=self.A2, samplerate=SAMPLE, loop=True)
                     case 3:
-                        sd.play(data=self.D3, samplerate=SAMPLE)
+                        sd.play(data=self.D3, samplerate=SAMPLE, loop=True)
                     case 4:
-                        sd.play(data=self.G3, samplerate=SAMPLE)
+                        sd.play(data=self.G3, samplerate=SAMPLE, loop=True)
                     case 5:
-                        sd.play(data=self.B3, samplerate=SAMPLE)
+                        sd.play(data=self.B3, samplerate=SAMPLE, loop=True)
                     case 6:
-                        sd.play(data=self.E4, samplerate=SAMPLE)
+                        sd.play(data=self.E4, samplerate=SAMPLE, loop=True)
                 while True:
                     pass
             except KeyboardInterrupt:

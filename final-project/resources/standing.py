@@ -6,7 +6,7 @@ from .projGlobals import *
 
 class StandingWave:
     def __init__(self):
-        # Create sin waves here. Reduce amplitude so it's not super loud
+        # Create sine waves here. Reduce amplitude so it's not super loud
         # first play by user.
 
         self.E2 = self.buildNote(E2_FREQ)

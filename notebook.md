@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/18/24 1:40AM - Final Project Touchups/Verify Windows Install](#111824-140am---final-project-touchupsverify-windows-install)
 - [11/7/24 11:30PM - 5:00PM - Final Project Work](#11724-1130pm---500pm---final-project-work)
 - [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
 - [11/2/2024 - HW2 Continued](#1122024---hw2-continued)
@@ -23,6 +24,11 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# 11/18/24 1:40AM - Final Project Touchups/Verify Windows Install
+- Had to reformat PC for a growing number of reasons
+- Used the final project to test my Python install
+- Fixed a typo.
 
 # 11/7/24 11:30PM - 5:00PM - Final Project Work
 - Adjust notes to self

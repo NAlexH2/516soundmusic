@@ -20,7 +20,7 @@ class StandingWave:
         if freq != E4_FREQ:
             note = 0.05 * np.sin(2 * np.pi * freq * T)
         else:
-            note = 0.01 * np.sin(2 * np.pi * freq * T)
+            note = 0.2 * np.sin(2 * np.pi * freq * T)
         note += self.secondHarmonic(freq)
         note += self.thirdHarmonic(freq)
         return note
@@ -29,13 +29,13 @@ class StandingWave:
         if freq != E4_FREQ:
             return 0.1 * np.sin(2 * np.pi * (2 * freq) * T)
         else:
-            return 0.01 * np.sin(2 * np.pi * (2 * freq) * T)
+            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T)
 
     def thirdHarmonic(self, freq):
         if freq != E4_FREQ:
             return 0.05 * np.sin(2 * np.pi * (3 * freq) * T)
         else:
-            return 0.01 * np.sin(2 * np.pi * (2 * freq) * T)
+            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T)
 
     def standingMenu(self):
         os.system("cls" if os.name == "nt" else "clear")
@@ -61,21 +61,21 @@ class StandingWave:
                 f"\nNow listening to {NOTES_DICT.get(opt)} "
                 + "note standing wave tone."
             )
-            print("Press Ctlr+C to stop listening.")
+            print("Press Ctrl+C to stop listening.")
             try:
                 match opt:
                     case 1:
                         sd.play(data=self.E2, samplerate=SAMPLE, loop=True)
                     case 2:
-                        sd.play(data=self.A2, samplerate=SAMPLE)
+                        sd.play(data=self.A2, samplerate=SAMPLE, loop=True)
                     case 3:
-                        sd.play(data=self.D3, samplerate=SAMPLE)
+                        sd.play(data=self.D3, samplerate=SAMPLE, loop=True)
                     case 4:
-                        sd.play(data=self.G3, samplerate=SAMPLE)
+                        sd.play(data=self.G3, samplerate=SAMPLE, loop=True)
                     case 5:
-                        sd.play(data=self.B3, samplerate=SAMPLE)
+                        sd.play(data=self.B3, samplerate=SAMPLE, loop=True)
                     case 6:
-                        sd.play(data=self.E4, samplerate=SAMPLE)
+                        sd.play(data=self.E4, samplerate=SAMPLE, loop=True)
                 while True:
                     pass
             except KeyboardInterrupt:

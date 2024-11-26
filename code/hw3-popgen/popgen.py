@@ -9,14 +9,29 @@ import numpy as np
 import sounddevice as sd
 
 # 11 canonical note names.
-names = [ "C", "Db", "D", "Eb", "E", "F", "Gb", "G", "Ab", "A", "Bb", "B", ]
-note_names = { s : i for i, s in enumerate(names) }
+names = [
+    "C",
+    "Db",
+    "D",
+    "Eb",
+    "E",
+    "F",
+    "Gb",
+    "G",
+    "Ab",
+    "A",
+    "Bb",
+    "B",
+]
+note_names = {s: i for i, s in enumerate(names)}
 
 # Turn a note name into a corresponding MIDI key number.
 # Format is name with optional bracketed octave, for example
 # "D" or "Eb[5]". Default is octave 4 if no octave is
 # specified.
 note_name_re = re.compile(r"([A-G]b?)(\[([0-8])\])?")
+
+
 def parse_note(s):
     m = note_name_re.fullmatch(s)
     if m is None:
@@ -27,6 +42,7 @@ def parse_note(s):
     if m[3] is not None:
         q = int(m[3])
     return note_names[s] + 12 * q
+
 
 # Given a string representing a knob setting between 0 and
 # 10 inclusive, return a linear gain value between 0 and 1
@@ -40,7 +56,8 @@ def parse_log_knob(k, db_at_zero=-40):
         return 0
     if v > 9.9:
         return 10
-    return 10**(-db_at_zero * (v - 10) / 200)
+    return 10 ** (-db_at_zero * (v - 10) / 200)
+
 
 # Given a string representing a knob setting between 0 and
 # 10 inclusive, return a linear gain value between 0 and 1
@@ -51,6 +68,7 @@ def parse_linear_knob(k):
         raise ValueError
     return v / 10
 
+
 # Given a string representing an gain in decibels, return a
 # linear gain value in the interval (0,1]. The input gain
 # must be negative.
@@ -58,16 +76,17 @@ def parse_db(d):
     v = float(d)
     if v > 0:
         raise ValueError
-    return 10**(v / 20)
+    return 10 ** (v / 20)
+
 
 ap = argparse.ArgumentParser()
-ap.add_argument('--bpm', type=int, default=90)
-ap.add_argument('--samplerate', type=int, default=48_000)
-ap.add_argument('--root', type=parse_note, default="C[5]")
-ap.add_argument('--bass-octave', type=int, default=2)
-ap.add_argument('--balance', type=parse_linear_knob, default="5")
-ap.add_argument('--gain', type=parse_db, default="-3")
-ap.add_argument('--output')
+ap.add_argument("--bpm", type=int, default=90)
+ap.add_argument("--samplerate", type=int, default=48_000)
+ap.add_argument("--root", type=parse_note, default="C[5]")
+ap.add_argument("--bass-octave", type=int, default=2)
+ap.add_argument("--balance", type=parse_linear_knob, default="5")
+ap.add_argument("--gain", type=parse_db, default="-3")
+ap.add_argument("--output")
 ap.add_argument("--test", action="store_true", help=argparse.SUPPRESS)
 args = ap.parse_args()
 
@@ -86,17 +105,20 @@ major_scale = [0, 2, 4, 5, 7, 9, 11]
 # Major chord scale tones — one-based.
 major_chord = [1, 3, 5]
 
+
 # Given a scale note with root note 0, return a key offset
 # from the corresponding root MIDI key.
 def note_to_key_offset(note):
     scale_degree = note % 7
     return note // 7 * 12 + major_scale[scale_degree]
 
+
 # Given a position within a chord, return a scale note
 # offset — zero-based.
 def chord_to_note_offset(posn):
     chord_posn = posn % 3
     return posn // 3 * 7 + major_chord[chord_posn] - 1
+
 
 # MIDI key where melody goes.
 melody_root = args.root
@@ -108,6 +130,8 @@ bass_root = melody_root - 12 * args.bass_octave
 chord_loop = [8, 5, 6, 4]
 
 position = 0
+
+
 def pick_notes(chord_root, n=4):
     global position
     p = position
@@ -126,6 +150,7 @@ def pick_notes(chord_root, n=4):
     position = p
     return notes
 
+
 # Given a MIDI key number and an optional number of beats of
 # note duration, return a sine wave for that note.
 def make_note(key, n=1):
@@ -135,10 +160,12 @@ def make_note(key, n=1):
     t = np.linspace(0, cycles, b)
     return np.sin(t)
 
+
 # Play the given sound waveform using `sounddevice`.
 def play(sound):
     sd.play(sound, samplerate=samplerate, blocking=True)
-        
+
+
 # Unit tests, driven by hidden `--test` argument.
 if args.test:
     note_tests = [
@@ -175,9 +202,11 @@ if args.test:
         assert c0 == c, f"{n} {c} {c0}"
 
     exit(0)
-    
+
 # Stitch together a waveform for the desired music.
 sound = np.array([], dtype=np.float64)
+first_pass = True
+last_idx = 0
 for c in chord_loop:
     notes = pick_notes(c - 1)
     melody = np.concatenate(list(make_note(i + melody_root) for i in notes))
@@ -189,6 +218,12 @@ for c in chord_loop:
     bass_gain = 1 - melody_gain
 
     sound = np.append(sound, melody_gain * melody + bass_gain * bass)
+    if first_pass == True:
+        first_pass = False
+        last_idx = len(sound)
+    else:
+        pass
+
 
 # Save or play the generated "music".
 if args.output:

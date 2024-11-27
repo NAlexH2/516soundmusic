@@ -205,24 +205,65 @@ if args.test:
 
 # Stitch together a waveform for the desired music.
 sound = np.array([], dtype=np.float64)
-first_pass = True
-last_idx = 0
+
+# Define how long we want the fade to be, then generate those samples
+fade_duration = 0.03  # in seconds
+fade_samples = int(fade_duration * samplerate)
+
+# Create global fade-in and fade-out envelopes
+global_fade_in = np.linspace(0, 1, fade_samples)
+global_fade_out = np.linspace(1, 0, fade_samples)
+
+
+def apply_fade(note: np.ndarray):
+
+    if note.size < 2 * fade_samples:
+        # If the note is shorter than the fade, scale the fade accordingly.
+        half = note.size // 2
+        fade_in = np.linspace(0, 1, half)
+        fade_out = np.linspace(1, 0, half)
+
+    else:
+        # Otherwise, no big deal! Use the precomputed global fades.
+        fade_in = global_fade_in
+        fade_out = global_fade_out
+
+    # Apply fade-in and fade-out
+    # First, beginning to the end of the fade_in.size as a slice. Safer and
+    # convenient than slicing on a prayer.
+
+    note[: fade_in.size] *= fade_in
+    # This is done with the fade_in envelope generated earlier
+    # (global or otherwise)
+
+    # Now fade out with the envelope, another slice, same thing as before.
+    note[-fade_out.size :] *= fade_out
+
+    # Lets send that new faded note home!
+    return note
+
+
 for c in chord_loop:
     notes = pick_notes(c - 1)
-    melody = np.concatenate(list(make_note(i + melody_root) for i in notes))
+
+    # fade all the samples before melody is actually created
+    melody = np.concatenate(
+        list(apply_fade(make_note(i + melody_root)) for i in notes)
+    )
 
     bass_note = note_to_key_offset(c - 1)
-    bass = make_note(bass_note + bass_root, n=4)
+
+    # Fade the bass so we don't get popping on it
+    bass = apply_fade(make_note(bass_note + bass_root, n=4))
 
     melody_gain = args.balance
     bass_gain = 1 - melody_gain
 
-    sound = np.append(sound, melody_gain * melody + bass_gain * bass)
-    if first_pass == True:
-        first_pass = False
-        last_idx = len(sound)
-    else:
-        pass
+    # Create the new sound! We had to fade the bass because of how it
+    # amplifies here too.
+    new_sound = melody_gain * melody + bass_gain * bass
+
+    sound = np.append(sound, new_sound)
 
 
 # Save or play the generated "music".

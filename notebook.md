@@ -1,6 +1,9 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/26/24 2:20PM - Setup and Work On Final Portfolio Objective](#112624-220pm---setup-and-work-on-final-portfolio-objective)
+  - [Commence working notes here:](#commence-working-notes-here)
+    - [Personal side note and feelings going through the class](#personal-side-note-and-feelings-going-through-the-class)
 - [11/18/24 1:40AM - Final Project Touchups/Verify Windows Install](#111824-140am---final-project-touchupsverify-windows-install)
 - [11/7/24 11:30PM - 5:00PM - Final Project Work](#11724-1130pm---500pm---final-project-work)
 - [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
@@ -24,6 +27,53 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# 11/26/24 2:20PM - Setup and Work On Final Portfolio Objective
+- Finished setting up for the final portfolio objective.
+- Will be working on it and adding comments regarding work done here.
+- Would normally have a readme in the directory, but do not want to remove or 
+change the one Bart has placed.
+## Commence working notes here:
+- Played demo.wav, will certainly be finding a way to do enveloping on the 
+final results.
+- Would like to see about trying different wave forms, we'll see...
+### Personal side note and feelings going through the class
+- I say "we'll see..." because I'm not very confident nor comfortable in this 
+class because it's just been hard for me as a non-musician to *really* 
+understand what is going on... 
+  - I figured I'd be able to pick up on as the class goes, but I am not a
+  musician nor terribly musically inclined and I am missing some key 
+  fundamentals that need to be taught to me over a longer period of time.
+  - This is due to the fact of just how I learn entirely new concepts, ideas, 
+  and content. Slow burns, with time to really dig into what's happening.
+  - Not related to the assignment, but I felt it needed to be said as the term 
+  gets closer and closer to the end.
+  - Doin' my best though!
+
+> Back to the program....
+- Researched what it would take to involve to remove that pop and came across 
+[this Stack Overflow question](https://stackoverflow.com/questions/78266711/removing-click-and-pop-sounds-in-python) which gave me an idea on how to 
+attempt a simple "fade" from one note to another.
+  - The current idea is to just take the last 100 or so samples, and get the 
+  average from there up to the first 100 of the next note, then find a way to
+  distribute that average across the previous 100 samples to lead into that 
+  final average.
+  - This means if the next note is lower, the previous 100 samples decrease. 
+  Higher, it increases.
+- Lets see if this works...
+  - **It didn't**
+- Though realizing the error, I was only focused on the fade out with that 
+article. I needed to also take care of the fade in so that both sides of 
+the waves are equal.
+  - I thought the fade in didn't matter because as long as one side fades out 
+  nicely to 0, then it's all good. WRONG!
+  - There still seemed to be a pop for whatever reason. Not significant, but 
+  enough to be noticeable.
+- However, I could tell that the heaviest samples at the start also had pop, so 
+I applied a fade to those as well.
+- You can find my added code and added comments in commit: 
+[`b02873e6d36dfc610666d9f1a039a0bf878f8f52`](https://github.com/NAlexH2/516soundmusic/commit/b02873e6d36dfc610666d9f1a039a0bf878f8f52)
+
 
 # 11/18/24 1:40AM - Final Project Touchups/Verify Windows Install
 - Had to reformat PC for a growing number of reasons

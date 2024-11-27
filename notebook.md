@@ -1,9 +1,10 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
-- [11/26/24 2:20PM - Setup and Work On Final Portfolio Objective](#112624-220pm---setup-and-work-on-final-portfolio-objective)
+- [11/26/24 - 2:20PM -\> 6:00PM - Setup and Work On Final Portfolio Objective](#112624---220pm---600pm---setup-and-work-on-final-portfolio-objective)
   - [Commence working notes here:](#commence-working-notes-here)
     - [Personal side note and feelings going through the class](#personal-side-note-and-feelings-going-through-the-class)
+  - [What else?](#what-else)
 - [11/18/24 1:40AM - Final Project Touchups/Verify Windows Install](#111824-140am---final-project-touchupsverify-windows-install)
 - [11/7/24 11:30PM - 5:00PM - Final Project Work](#11724-1130pm---500pm---final-project-work)
 - [11/5/24 11:30AM - Starting final project/Laying out plans](#11524-1130am---starting-final-projectlaying-out-plans)
@@ -28,15 +29,18 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
-# 11/26/24 2:20PM - Setup and Work On Final Portfolio Objective
+# 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective
+- Link to the [portfolio objective folder here](code/hw3-popgen).
 - Finished setting up for the final portfolio objective.
 - Will be working on it and adding comments regarding work done here.
 - Would normally have a readme in the directory, but do not want to remove or 
 change the one Bart has placed.
+
 ## Commence working notes here:
 - Played demo.wav, will certainly be finding a way to do enveloping on the 
 final results.
 - Would like to see about trying different wave forms, we'll see...
+
 ### Personal side note and feelings going through the class
 - I say "we'll see..." because I'm not very confident nor comfortable in this 
 class because it's just been hard for me as a non-musician to *really* 
@@ -73,6 +77,18 @@ the waves are equal.
 I applied a fade to those as well.
 - You can find my added code and added comments in commit: 
 [`b02873e6d36dfc610666d9f1a039a0bf878f8f52`](https://github.com/NAlexH2/516soundmusic/commit/b02873e6d36dfc610666d9f1a039a0bf878f8f52)
+- This isn't perfect. Going from high to low or vice versa still has a subtle 
+pop, but it's way better than what it was before!
+
+## What else?
+- I played with the program a bit and hadn't realized the bass was an... 
+undertone? I believe that is what it's called. I thought each note actually had 
+bass added to it, but it's almost as if another sin wave was riding under it. 
+I just thought this was neat. You can find the files I generated at the link 
+at the top of these notes.
+  - This is most noticeable by [this file here.](code/hw3-popgen/fade_bass4_150bpm_C7Root.wav)
+  **WARNING**: This is semi-high pitched, but no where near deafening. Keep your 
+  volume just a tad low so you're not shocked by it.
 
 
 # 11/18/24 1:40AM - Final Project Touchups/Verify Windows Install

@@ -50,6 +50,7 @@ Table of contents are generated using a VSCode extension called
   calculate the dominant frequency.
     - Dominant frequency is proving to be an issue too, but 
     only because it is 2x what the frequency is supposed to be
+    
 - (2:30pm) Regarding the dominant frequency...
   - For example, a high E note on a guitar (or any instrument, 
   I suppose) is registered at 329 Hz.
@@ -61,7 +62,7 @@ Table of contents are generated using a VSCode extension called
   I will.
   I want to finish this step so I can get started on the
   (seemingly) more direct and easier automatic detection.
-  
+
 - Did I find the math error?
 
 # 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective

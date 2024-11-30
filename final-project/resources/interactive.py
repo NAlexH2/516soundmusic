@@ -1,6 +1,5 @@
 from time import sleep
 import numpy as np
-import pyaudio
 from pyaudio import PyAudio, Stream, get_format_from_width
 from .projGlobals import *
 
@@ -121,8 +120,8 @@ class InteractiveDetection:
             self.selectRecordingDevice()
 
         termClear()
-        print(f"Using device #{self.rec_dev_num} - {self.rec_dev_name}")
         while opt == -1:
+            print(f"Using device #{self.rec_dev_num} - {self.rec_dev_name}")
             print("Which note will you be tuning for?")
             opt = noteMenu()
             self.note = opt
@@ -145,8 +144,3 @@ class InteractiveDetection:
             self.stream.close()
             opt = -1
             self.note = -1
-
-
-if __name__ == "__main__":
-    intD = InteractiveDetection()
-    intD.interStart()

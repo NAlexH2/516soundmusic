@@ -1,5 +1,6 @@
 from time import sleep
 import numpy as np
+import pyaudio
 from pyaudio import PyAudio, Stream, get_format_from_width
 from .projGlobals import *
 

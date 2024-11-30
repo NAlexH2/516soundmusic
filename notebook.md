@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
 - [11/26/24 - 2:20PM -\> 6:00PM - Setup and Work On Final Portfolio Objective](#112624---220pm---600pm---setup-and-work-on-final-portfolio-objective)
   - [Commence working notes here:](#commence-working-notes-here)
     - [Personal side note and feelings going through the class](#personal-side-note-and-feelings-going-through-the-class)
@@ -28,6 +29,35 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# 11/30/24 - 9:32 AM - Working on Final Project
+- Plans today are the following:
+  - Get live audio to be captured and detected on the interactive
+  option of the tuner.
+  - Do live processing of that data while capturing it to see how close
+  it is to the note the user selected.
+  - If this all goes well, get started on the automatic detection.
+    - Research done on this part shows it's REALLY short and brief to 
+    actually implement, but, we'll see.
+
+- (10am) Starting with the live capture though... How did it go?
+  - (2:30pm) Well had a few off by one issues so wrong devices 
+  were being selected causing many issues.
+    - This is where I spent most of my time.
+  - This issue took me a long time.
+  - During this I was also fighting with the way I was capturing
+  audio. Wound up having to sample for 3 seconds and then 
+  calculate the dominant frequency.
+    - Dominant frequency is proving to be an issue too, but 
+    only because it is 2x what the frequency is supposed to be
+- (2:30pm) Regarding the dominant frequency...
+  - For example, a high E note on a guitar (or any instrument, 
+  I suppose) is registered at 329 Hz.
+  - I tuned my guitar using another app to verify it was tuned correctly.
+  - However, the dominant freq according to the python script 
+  is ~658 Hz, which obviosuly isn't correct.
+  - I suspect there's just a simple math error somewhere.
+- Did I find the math error?
 
 # 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective
 - Link to the [portfolio objective folder here](code/hw3-popgen).

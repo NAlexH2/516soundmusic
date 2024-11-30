@@ -53,9 +53,11 @@ def freqDifference(note: str, diff: float) -> str:
         )
 
 
-def noteMenu() -> int:
+def noteMenu(ctx: str) -> int:
     opt = -1
     while opt < 0 or opt > 6:
+        if ctx:
+            print(ctx)
         try:
             opt = int(
                 input(

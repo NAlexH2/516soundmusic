@@ -122,9 +122,11 @@ class InteractiveDetection:
 
         termClear()
         while opt == -1:
-            print(f"Using device #{self.rec_dev_num} - {self.rec_dev_name}")
-            print("Which note will you be tuning for?")
-            opt = noteMenu()
+            context = (
+                f"Using device #{self.rec_dev_num} - {self.rec_dev_name}\n"
+                + "Which note will you be tuning for?"
+            )
+            opt = noteMenu(context)
             self.note = opt
             if opt == 0:
                 return

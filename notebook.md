@@ -64,6 +64,18 @@ Table of contents are generated using a VSCode extension called
   automatic detection.
 
 - Did I find the math error?
+  - Yes and no. Low E and High E on a guitar are being silly for some reason.
+  - So those get divided by 2.
+  - All other notes do not.
+- Another weird thing is sometimes when you start the recording the first time,
+it thinks it's way too high or too low, as if the captured values got cut off at
+the start or the end.
+  - This is outside my knowledge why it might be happening, but it is.
+  - Running the note and recording again shows that there is not an issue at
+  all.
+
+- I am **very** happy with how todays progress went and will get started on the
+final one soon - if not tomorrow (12/01/24). We'll see.
 
 # 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective
 - Link to the [portfolio objective folder here](code/hw3-popgen).

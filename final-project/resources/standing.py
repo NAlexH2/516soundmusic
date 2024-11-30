@@ -1,7 +1,15 @@
-import os
 import numpy as np
 import sounddevice as sd
 from .projGlobals import *
+
+
+# Define how long we want the fade to be, then generate those samples
+fade_duration = 0.03  # in seconds
+fade_samples = int(fade_duration * SAMPLE)
+
+# Create global fade-in and fade-out envelopes
+global_fade_in = np.linspace(0, 1, fade_samples)
+global_fade_out = np.linspace(1, 0, fade_samples)
 
 
 class StandingWave:
@@ -9,12 +17,27 @@ class StandingWave:
         # Create sine waves here. Reduce amplitude so it's not super loud
         # first play by user.
 
-        self.E2 = self.buildNote(E2_FREQ)
-        self.A2 = self.buildNote(A2_FREQ)
-        self.D3 = self.buildNote(D3_FREQ)
-        self.G3 = self.buildNote(G3_FREQ)
-        self.B3 = self.buildNote(B3_FREQ)
-        self.E4 = self.buildNote(E4_FREQ)
+        self.E2 = self.apply_fade(self.buildNote(E2_FREQ))
+        self.A2 = self.apply_fade(self.buildNote(A2_FREQ))
+        self.D3 = self.apply_fade(self.buildNote(D3_FREQ))
+        self.G3 = self.apply_fade(self.buildNote(G3_FREQ))
+        self.B3 = self.apply_fade(self.buildNote(B3_FREQ))
+        self.E4 = self.apply_fade(self.buildNote(E4_FREQ))
+
+    # Fade notes so they don't have popping on loop.
+    def apply_fade(self, note: np.ndarray):
+
+        if note.size < 2 * fade_samples:
+            half = note.size // 2
+            fade_in = np.linspace(0, 1, half)
+            fade_out = np.linspace(1, 0, half)
+        else:
+            fade_in = global_fade_in
+            fade_out = global_fade_out
+
+        note[: fade_in.size] *= fade_in
+        note[-fade_out.size :] *= fade_out
+        return note
 
     def buildNote(self, freq):
         if freq != E4_FREQ:
@@ -38,7 +61,7 @@ class StandingWave:
             return 0.04 * np.sin(2 * np.pi * (2 * freq) * T)
 
     def standingMenu(self):
-        os.system("cls" if os.name == "nt" else "clear")
+        termClear()
         opt = -1
         while opt < 0 or opt > 6:
             try:

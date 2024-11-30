@@ -1,4 +1,3 @@
-import os
 import numpy as np
 import sounddevice as sd
 import librosa
@@ -9,5 +8,5 @@ from .projGlobals import *
 class InteractiveDetection:
 
     def interStart(self):
-        os.system("cls" if os.name == "nt" else "clear")
+        termClear()
         print("inter start")

@@ -9,5 +9,5 @@ from .projGlobals import *
 class AutomaticDetection:
 
     def autoStart(self):
-        os.system("cls" if os.name == "nt" else "clear")
+        termClear()
         print("auto start")

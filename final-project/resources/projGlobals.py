@@ -23,6 +23,36 @@ def termClear():
     os.system("cls" if os.name == "nt" else "clear")
 
 
+def freqDifference(note: str, diff: float) -> str:
+    if diff >= 2:
+        if diff > 10:
+            return (
+                f"Tuned way too high! Turn {note} down!\nDifference: {diff}Hz"
+            )
+        elif diff > 5:
+            return f"Still way too high!\nDifference: {diff}Hz"
+        elif diff <= 5:
+            return f"Almost there! Too high.\nDifference: {diff}Hz"
+        else:
+            return f"Very close! Too high.\nDifference: {diff}Hz"
+
+    if diff < -1:
+        if diff > 10:
+            return f"Tuned way too low! Turn {note} up!\nDifference: {diff}Hz"
+        elif diff > 5:
+            return f"Still way too low!\nDifference: {diff}Hz"
+        elif diff <= 5:
+            return f"Almost there! Too low.\nDifference: {diff}Hz"
+        else:
+            return f"Very close! Too low.\nDifference: {diff}Hz"
+    if diff < 2 and diff > -2:
+        return (
+            "\033[32m"
+            + f"\nHonestly, close enough!\nDifference: {diff}Hz"
+            + "\033[0m"
+        )
+
+
 def noteMenu() -> int:
     opt = -1
     while opt < 0 or opt > 6:

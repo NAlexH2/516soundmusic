@@ -2,7 +2,7 @@ from time import sleep
 import numpy as np
 import pyaudio
 from pyaudio import PyAudio, Stream, get_format_from_width
-from projGlobals import *
+from .projGlobals import *
 
 
 class InteractiveDetection:
@@ -77,28 +77,42 @@ class InteractiveDetection:
     def compareNote(self):
         termClear()
         self.stream.start_stream()
-        again = "y"
-        while again == "y":
+        again = "s"
+        test_note = NOTES_DICT.get(self.note)
+        test_freq = FREQ_DICT.get(self.note)
+        while again == "s":
+            termClear()
             conf = input(
                 f"Start recording for analysis using device {self.rec_dev_name}\n"
-                f"and note {NOTES_DICT.get(self.note)}? 'N' will return you to note selection.\n"
-                "Record? Y/N: "
+                f"and note {test_note}? 'N' will return you to note selection.\n"
+                "\nRecord? Y/N: "
             ).lower()
             if conf == "y":
+                termClear()
                 fft_res = np.fft.fft((self.recAudio()))
                 magnitude = np.abs(fft_res)
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
                 positive_mask = freqs > 0
                 dom_freq_idx = np.argmax(magnitude[positive_mask])
-                dom_freq = freqs[positive_mask][dom_freq_idx]
-                print(dom_freq)
+                if test_freq == 82.41 or test_freq == 329.63:
+                    dom_freq = (freqs[positive_mask][dom_freq_idx]) / 2
+                else:
+                    dom_freq = freqs[positive_mask][dom_freq_idx]
+                dom_freq = float("{:.3f}".format(dom_freq))
+                print(f"\nExpected frequency: {test_freq}")
+                print(f"Recored frequency: {dom_freq}")
+                diff_freq = float("{:.3f}".format(test_freq - dom_freq))
+                print(freqDifference(test_note, diff_freq))
+
             elif conf == "n":
                 return
             else:
                 termClear()
                 conf = "n"
                 print("Input Error: Only Y or N please...\n")
-            again = input("Record another? Y/N: ").lower()
+            again = input(
+                "\nRecord same note or a different one? S/D: "
+            ).lower()
         return
 
     def interStart(self):

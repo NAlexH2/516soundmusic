@@ -27,8 +27,8 @@ def printOptions():
         + "    against.\n"
     )
     print(
-        "2 - Interactive Detection - Pick and play the note to see how \n"
-        + "    correct its pitch is.\n"
+        "2 - Interactive Detection - Pick a note, play and record the note, then\n"
+        + "    see how correct its pitch is.\n"
     )
     print(
         "3 - Automatic Detection - Play any note, and this will automatically \n"

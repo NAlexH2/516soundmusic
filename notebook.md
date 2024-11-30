@@ -41,8 +41,8 @@ Table of contents are generated using a VSCode extension called
     actually implement, but, we'll see.
 
 - (10am) Starting with the live capture though... How did it go?
-  - (2:30pm) Well had a few off by one issues so wrong devices 
-  were being selected causing many issues.
+  - (2:30pm) Well had a few off by one issues so wrong devices were being 
+  selected causing many issues.
     - This is where I spent most of my time.
   - This issue took me a long time.
   - During this I was also fighting with the way I was capturing
@@ -52,16 +52,16 @@ Table of contents are generated using a VSCode extension called
     only because it is 2x what the frequency is supposed to be
     
 - (2:30pm) Regarding the dominant frequency...
-  - For example, a high E note on a guitar (or any instrument, 
-  I suppose) is registered at 329 Hz.
+  - For example, a high E note on a guitar (or any instrument, I suppose) 
+  is registered at 329 Hz.
   - I tuned my guitar using another app to verify it was tuned correctly.
-  - However, the dominant freq according to the python script 
-  is ~658 Hz, which obviosuly isn't correct.
+  - However, the dominant freq according to the python script is ~658 Hz, 
+  which obviously isn't correct.
   - I suspect there's just a simple math error somewhere.
-  - I do want to finish this step of the project today though. If the math error just requires me to divide by 2, 
-  I will.
-  I want to finish this step so I can get started on the
-  (seemingly) more direct and easier automatic detection.
+  - I do want to finish this step of the project today though. If the math 
+  error just requires me to divide by 2, I will. I want to finish this step 
+  so I can get started on the (seemingly) more direct and easier 
+  automatic detection.
 
 - Did I find the math error?
 

@@ -62,24 +62,8 @@ class StandingWave:
 
     def standingMenu(self):
         termClear()
-        opt = -1
-        while opt < 0 or opt > 6:
-            try:
-                opt = int(
-                    input(
-                        "1: E (Low)\t4: G\n"
-                        + "2: A\t\t5: B\n"
-                        + "3: D\t\t6: E (High)\n"
-                        + "\n0: Exit\n\nOption: "
-                    )
-                )
-            except ValueError:
-                opt = -1
-                os.system("cls" if os.name == "nt" else "clear")
-                continue
-            if opt == 0:
-                return
-
+        while True:
+            opt = noteMenu()
             print(
                 f"\nNow listening to {NOTES_DICT.get(opt)} "
                 + "note standing wave tone."
@@ -99,11 +83,13 @@ class StandingWave:
                         sd.play(data=self.B3, samplerate=SAMPLE, loop=True)
                     case 6:
                         sd.play(data=self.E4, samplerate=SAMPLE, loop=True)
+                    case 0:
+                        return
                 while True:
                     pass
             except KeyboardInterrupt:
                 sd.stop()
-                os.system("cls" if os.name == "nt" else "clear")
+                termClear()
                 print(
                     f"No longer listening to {NOTES_DICT.get(opt)} "
                     + "note standing wave tone.\n"

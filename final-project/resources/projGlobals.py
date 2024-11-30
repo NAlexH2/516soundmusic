@@ -18,3 +18,26 @@ NOTES_DICT = {1: "E (Low)", 2: "A", 3: "D", 4: "G", 5: "B", 6: "E (High)"}
 
 def termClear():
     os.system("cls" if os.name == "nt" else "clear")
+
+
+def noteMenu() -> int:
+    opt = -1
+    while opt < 0 or opt > 6:
+        try:
+            opt = int(
+                input(
+                    "1: E (Low)\t4: G\n"
+                    + "2: A\t\t5: B\n"
+                    + "3: D\t\t6: E (High)\n"
+                    + "\n0: Exit\n\nOption: "
+                )
+            )
+        except ValueError:
+            opt = -1
+            termClear()
+            continue
+        if opt > 6:
+            opt = -1
+            termClear()
+            continue
+    return opt

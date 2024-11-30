@@ -57,6 +57,11 @@ Table of contents are generated using a VSCode extension called
   - However, the dominant freq according to the python script 
   is ~658 Hz, which obviosuly isn't correct.
   - I suspect there's just a simple math error somewhere.
+  - I do want to finish this step of the project today though. If the math error just requires me to divide by 2, 
+  I will.
+  I want to finish this step so I can get started on the
+  (seemingly) more direct and easier automatic detection.
+  
 - Did I find the math error?
 
 # 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective

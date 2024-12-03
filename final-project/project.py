@@ -1,9 +1,4 @@
 import os
-import numpy as np
-import sounddevice as sd
-import librosa
-import matplotlib
-from scipy import fft
 from resources import automatic, interactive, standing
 
 

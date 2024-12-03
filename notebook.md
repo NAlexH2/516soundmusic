@@ -50,6 +50,17 @@ the project.
   - When adjusting code, it seemingly falls apart.
   - I'm going to commit the broken piece and work on it because I know that's 
   the route I need take.
+- In working on the automatic, I found bugs in the interactive! Mostly because I
+was jumping back to my previous work to check on how I did it there.
+  - The E4 calc when searching for dominate frequencies was wrong.
+  - E2 was right
+  - However, if you plucked a low note when comparing against a higher, the 
+  math was wrong.
+    - Vice versa applies too.
+- It turns out, this is much harder to do a 'live' listen and parsing than 
+expected. I think it requires a better microphone than my webcam as well, but 
+we'll see. I'm going to message Bart and ask for some assistance tomorrow after 
+class.
 
 # 12/1/24 - 12:48 PM - About working today...
 - I decided I did enough yesterday. The final step can be saved for later this

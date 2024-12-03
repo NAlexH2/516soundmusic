@@ -1,5 +1,6 @@
 import os
 from resources import automatic, interactive, standing
+import resources.projGlobals as pg
 
 
 # This project is going to be a tuner with several options. Specifically, for a
@@ -36,10 +37,18 @@ def printOptions():
 
 def mainMenu():
     opt = -1
+    clrs = False
     sw = standing.StandingWave()
     interDec = interactive.InteractiveDetection()
     ad = automatic.AutomaticDetection()
     while opt < 0 or opt > 3:
+        if clrs == True:
+            pg.termClear()
+            clrs = False
+        if opt < -1 or opt > 3:
+            print(f"**ERROR** --- {opt} is an invalid option!\n")
+            opt = -1
+            clrs = True
         printOptions()
         try:
             opt = int(input())
@@ -54,14 +63,16 @@ def mainMenu():
                 return
             case 1:
                 sw.standingMenu()
+                opt = -1
             case 2:
                 interDec.interStart()
+                opt = -1
             case 3:
                 ad.autoStart()
+                opt = -1
             case _:
-                os.system("cls" if os.name == "nt" else "clear")
-                print(f"**ERROR** --- {opt} is an invalid option!\n")
-        opt = -1
+                pass
+        clrs = True
 
 
 if __name__ == "__main__":

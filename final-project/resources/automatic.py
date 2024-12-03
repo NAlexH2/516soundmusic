@@ -87,11 +87,18 @@ class AutomaticDetection:
                 f"Nearest note: {self.nearest_note}\n"
                 f"Expected freq: {expt_freq}\n"
                 f"Actual freq: {self.pitch}\n"
-                f"{freqDifference(self.nearest_note, freq_diff)}"
+                f"{freqDifference(self.nearest_note, freq_diff)}\n"
+                "CTRL+C to return to main menu!",
+                end="\r",
             )
         else:
-            print("Waiting for you to play!")
-        print("CTRL+C to return to main menu!")
+            print(
+                "Waiting for you to play!\n"
+                "If you are, make sure your device is plugged in.\n"
+                "CTRL+C to return to main menu!",
+                end="\r",
+            )
+            print()
 
     def autoStart(self):
         termClear()

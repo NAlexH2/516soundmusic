@@ -61,6 +61,10 @@ was jumping back to my previous work to check on how I did it there.
 expected. I think it requires a better microphone than my webcam as well, but 
 we'll see. I'm going to message Bart and ask for some assistance tomorrow after 
 class.
+- I think... I will want to switch back to PyAudio instead of using sounddevice
+for this one. Since you have better control over the byte stream with it. 
+  - Sounddevice likes to start and stop a lot, but that doesn't work here I
+  think. Again, will need to seek advice/help.
 
 # 12/1/24 - 12:48 PM - About working today...
 - I decided I did enough yesterday. The final step can be saved for later this

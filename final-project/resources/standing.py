@@ -63,12 +63,14 @@ class StandingWave:
     def standingMenu(self):
         termClear()
         while True:
-            opt = noteMenu()
-            print(
-                f"\nNow listening to {NOTES_DICT.get(opt)} "
-                + "note standing wave tone."
-            )
-            print("Press Ctrl+C to stop listening.")
+            ctx = "Pick which note to generate a standing wave form of.\n"
+            opt = noteMenu(ctx)
+            if opt != 0:
+                print(
+                    f"\nNow listening to {NOTES_DICT.get(opt)} "
+                    + "note standing wave tone."
+                )
+                print("Press Ctrl+C to stop listening.")
             try:
                 match opt:
                     case 1:

@@ -1,7 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
-- [12/2/24 - 2:00 PM - Wrapping the project up today... I hope...](#12224---200-pm---wrapping-the-project-up-today-i-hope)
+- [12/2/24 - 2:00 PM -\> 6:09 PM - Wrapping the project up today... I hope...](#12224---200-pm---609-pm---wrapping-the-project-up-today-i-hope)
 - [12/1/24 - 12:48 PM - About working today...](#12124---1248-pm---about-working-today)
 - [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
 - [11/26/24 - 2:20PM -\> 6:00PM - Setup and Work On Final Portfolio Objective](#112624---220pm---600pm---setup-and-work-on-final-portfolio-objective)
@@ -32,7 +32,7 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
-# 12/2/24 - 2:00 PM - Wrapping the project up today... I hope...
+# 12/2/24 - 2:00 PM -> 6:09 PM - Wrapping the project up today... I hope...
 > We'll see...
 - Found an article that can help move me forward on writing the automatic 
 detection, but it focuses more on a large range of notes, but I'm just focussing

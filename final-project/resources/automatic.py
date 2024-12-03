@@ -37,29 +37,29 @@ class AutomaticDetection:
                 "and note comparison: "
             )
             try:
-                for d in range(len(device_list)):
-                    print(f"   #{d+1} - Name: {device_list[d]}")
+                for d in device_list:
+                    print(f"   #{d} - Name: {device_list[d]}")
                 opt = int(input("\nPlease enter which device number to use: "))
             except ValueError:
                 opt = -1
                 termClear()
                 print("Invalid option...\n")
                 continue
-            if opt > len(device_list) or opt < 1:
+            if opt not in device_list:
                 opt = -1
                 termClear()
                 print("Invalid option...\n")
                 continue
             else:
-                print(f"Selected device --> {device_list[opt-1]}.")
+                print(f"Selected device --> {device_list[opt]}.")
                 conf = input("Is this correct? Y/N: ").lower()
                 if conf != "y":
                     conf = "n"
                     termClear()
                     continue
 
-        self.rec_dev_num = opt - 1
-        self.rec_dev_name = device_list[opt - 1]
+        self.rec_dev_num = opt
+        self.rec_dev_name = device_list[opt]
         return
 
     def nearest_neighbor(self):

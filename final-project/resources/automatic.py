@@ -3,6 +3,8 @@ import numpy as np
 import sounddevice as sd
 from .projGlobals import *
 
+# Number of samples per FFT. Should be a power of 2.
+FFT_LEN = 4096
 
 class AutomaticDetection:
 
@@ -11,9 +13,10 @@ class AutomaticDetection:
         self.notes = list(NOTES_DICT.values())
         self.nearest_note = ""
         self.nearest_pitch = ""
-        self.win_samples = np.zeros(SAMPLE_RATE, dtype=np.float32)
         self.rec_dev_num = None
         self.rec_dev_name = None
+        self.buffer = np.array([], dtype=np.float64)
+        self.frames_processed = 0
 
     def selectRecordingDevice(self):
         termClear()
@@ -37,29 +40,29 @@ class AutomaticDetection:
                 "and note comparison: "
             )
             try:
-                for d in range(len(device_list)):
-                    print(f"   #{d+1} - Name: {device_list[d]}")
+                for d in device_list:
+                    print(f"   #{d} - Name: {device_list[d]}")
                 opt = int(input("\nPlease enter which device number to use: "))
             except ValueError:
                 opt = -1
                 termClear()
                 print("Invalid option...\n")
                 continue
-            if opt > len(device_list) or opt < 1:
+            if opt not in device_list:
                 opt = -1
                 termClear()
                 print("Invalid option...\n")
                 continue
             else:
-                print(f"Selected device --> {device_list[opt-1]}.")
+                print(f"Selected device --> {device_list[opt]}.")
                 conf = input("Is this correct? Y/N: ").lower()
                 if conf != "y":
                     conf = "n"
                     termClear()
                     continue
 
-        self.rec_dev_num = opt - 1
-        self.rec_dev_name = device_list[opt - 1]
+        self.rec_dev_num = opt
+        self.rec_dev_name = device_list[opt]
         return
 
     def nearest_neighbor(self):
@@ -71,28 +74,33 @@ class AutomaticDetection:
 
     def callback(self, inputD: np.ndarray, frames, dur, state):
         if any(inputD):
-            fft_res = np.fft.fft(inputD[:, 0])
+            if len(self.buffer) >= FFT_LEN + frames:
+                self.buffer = self.buffer[frames:]
+            self.buffer = np.append(self.buffer, inputD.flatten())
+            fft_res = np.fft.fft(self.buffer[:FFT_LEN])
             magnitude = np.abs(fft_res)
             freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
             positive_mask = freqs > 0
             dom_freq_idx = np.argmax(magnitude[positive_mask])
             self.dom_freq = freqs[positive_mask][dom_freq_idx]
             self.nearest_neighbor()
-            termClear()
-            expt_freq = float(
-                "{:.3f}".format(NOTES_TO_FREQ_DICT[self.nearest_note])
-            )
-            freq_diff = float("{:.3f}".format(expt_freq - self.dom_freq))
-            if expt_freq > self.dom_freq:
-                freq_diff *= -1
-            print(
-                f"Nearest note: {self.nearest_note}\n"
-                f"Expected freq: {expt_freq}\n"
-                f"Actual freq: {self.dom_freq}\n"
-                f"{freqDifference(self.nearest_note, freq_diff)}\n"
-                "CTRL+C to return to main menu!",
-                end="\r",
-            )
+            if self.frames_processed % int(0.1 * SAMPLE_RATE) == 0:
+                termClear()
+                expt_freq = float(
+                    "{:.3f}".format(NOTES_TO_FREQ_DICT[self.nearest_note])
+                )
+                freq_diff = float("{:.3f}".format(expt_freq - self.dom_freq))
+                if expt_freq > self.dom_freq:
+                    freq_diff *= -1
+                print(
+                    f"Nearest note: {self.nearest_note}\n"
+                    f"Expected freq: {expt_freq}\n"
+                    f"Actual freq: {self.dom_freq}\n"
+                    f"{freqDifference(self.nearest_note, freq_diff)}\n"
+                    "CTRL+C to return to main menu!",
+                    end="\r",
+                )
+            self.frames_processed += frames
         else:
             print(
                 "Waiting for you to play!\n"
@@ -106,15 +114,15 @@ class AutomaticDetection:
         termClear()
         self.selectRecordingDevice()
         try:
-            with sd.InputStream(
+            stream = sd.InputStream(
                 samplerate=SAMPLE_RATE,
-                blocksize=SAMPLE_RATE,
+                blocksize=64,
                 device=self.rec_dev_num,
                 channels=1,
                 callback=self.callback,
-            ):
-                while True:
-                    pass
+            )
+            stream.start()
+            sd.wait()
         except KeyboardInterrupt:
             return
 

@@ -1,6 +1,7 @@
 import numpy as np
 import os
 
+# Used throughout the program
 SAMPLE_RATE = 48000
 MAX16 = 32767
 STANDING_DUR = 3
@@ -8,15 +9,31 @@ T = np.int16
 T = np.linspace(
     0, STANDING_DUR, int(SAMPLE_RATE * STANDING_DUR), endpoint=False
 )
-E2_FREQ = 82.41  # low E string on guitar
-A2_FREQ = 110  # A string on guitar
-D3_FREQ = 146.83  # D string on guitar
-G3_FREQ = 196  # G string on guitar
-B3_FREQ = 246.94  # B string on guitar
-E4_FREQ = 329.63  # E string on guitar
+E2_FREQ = 82.41  # low E string on guitar (E2)
+A2_FREQ = 110  # A string on guitar (A2)
+D3_FREQ = 146.83  # D string on guitar (D3)
+G3_FREQ = 196  # G string on guitar (G3)
+B3_FREQ = 246.94  # B string on guitar (B3)
+E4_FREQ = 329.63  # E string on guitar (E4)
 
-NOTES_DICT = {1: "E (Low)", 2: "A", 3: "D", 4: "G", 5: "B", 6: "E (High)"}
+
+NOTES_DICT = {1: "E2", 2: "A2", 3: "D3", 4: "G3", 5: "B3", 6: "E4"}
 FREQ_DICT = {1: 82.41, 2: 110, 3: 146.83, 4: 196, 5: 246.94, 6: 329.63}
+NOTES_TO_FREQ_DICT = {
+    "E2": 82.41,
+    "A2": 110,
+    "D3": 146.83,
+    "G3": 196,
+    "B3": 246.94,
+    "E4": 329.63,
+}
+
+# Used for DFT tuner (automatic.py)
+PITCH_CHECK = 440.0
+WINDOW_SIZE = 32768
+WINDOW_SLIDE = 24000
+SLIDE_T = 24000 / SAMPLE_RATE
+SAMPLE_T = 1 / SAMPLE_RATE
 
 
 def termClear():
@@ -61,9 +78,9 @@ def noteMenu(ctx: str) -> int:
         try:
             opt = int(
                 input(
-                    "1: E (Low)\t4: G\n"
-                    + "2: A\t\t5: B\n"
-                    + "3: D\t\t6: E (High)\n"
+                    "1: E2\t4: G2\n"
+                    + "2: A3\t\t5: B3\n"
+                    + "3: D3\t\t6: E4\n"
                     + "\n0: Exit\n\nOption: "
                 )
             )

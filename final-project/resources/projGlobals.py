@@ -88,4 +88,4 @@ def noteMenu(ctx: str) -> int:
             opt = -1
             termClear()
             continue
-    return opt
+    return int(opt)

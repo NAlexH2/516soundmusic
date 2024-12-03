@@ -94,14 +94,16 @@ class InteractiveDetection:
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
                 positive_mask = freqs > 0
                 dom_freq_idx = np.argmax(magnitude[positive_mask])
-                if test_freq == 82.41 or test_freq == 329.63:
+                if test_freq == 82.41:
                     dom_freq = (freqs[positive_mask][dom_freq_idx]) / 2
                 else:
                     dom_freq = freqs[positive_mask][dom_freq_idx]
                 dom_freq = float("{:.3f}".format(dom_freq))
                 print(f"\nExpected frequency: {test_freq}")
                 print(f"Recored frequency: {dom_freq}")
-                diff_freq = float("{:.3f}".format(test_freq - dom_freq))
+                diff_freq = abs(float("{:.3f}".format(test_freq - dom_freq)))
+                if test_freq > dom_freq:
+                    diff_freq *= -1
                 print(freqDifference(test_note, diff_freq))
 
             elif conf == "n":
@@ -129,6 +131,7 @@ class InteractiveDetection:
             opt = noteMenu(context)
             self.note = opt
             if opt == 0:
+                self.stream.close()
                 return
             self.stream = PyAudio().open(
                 format=pyaudio.paFloat32,
@@ -144,6 +147,6 @@ class InteractiveDetection:
                 f"No longer comparing against {NOTES_DICT.get(opt)} "
                 + "note standing wave tone.\n"
             )
-            self.stream.close()
+            self.stream.stop_stream()
             opt = -1
             self.note = -1

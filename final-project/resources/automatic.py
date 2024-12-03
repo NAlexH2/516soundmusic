@@ -1,6 +1,4 @@
-import os
-import pyaudio
-from pyaudio import PyAudio, Stream, get_format_from_width
+from pyaudio import PyAudio
 import numpy as np
 import sounddevice as sd
 from projGlobals import *
@@ -66,19 +64,19 @@ class AutomaticDetection:
 
     def nearest_neighbor(self):
         notes_len = len(self.notes)
-        n = np.round((self.pitch / PITCH_CHECK) * notes_len)
+        n = int(np.round((self.pitch / PITCH_CHECK) * notes_len))
         self.nearest_note = self.notes[n % notes_len]
         self.nearest_pitch = PITCH_CHECK * 2 ** (n / notes_len)
         return
 
     def callback(self, inputD: np.ndarray, frames, dur, state):
         if any(inputD):
-            self.win_samples = np.concatenate((self.win_samples, inputD[:, 0]))
-            self.win_samples = self.win_samples[inputD[:, 0].size :]
-
-            fft_res = np.fft.fft(self.win_samples)
+            fft_res = np.fft.fft(inputD[:, 0])
             magnitude = np.abs(fft_res)
-            self.pitch = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
+            freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
+            positive_mask = freqs > 0
+            dom_freq_idx = np.argmax(magnitude[positive_mask])
+            self.pitch = freqs[positive_mask][dom_freq_idx]
             self.nearest_neighbor()
             termClear()
             expt_freq = float(
@@ -101,7 +99,7 @@ class AutomaticDetection:
         try:
             with sd.InputStream(
                 samplerate=SAMPLE_RATE,
-                blocksize=WINDOW_SLIDE,
+                blocksize=SAMPLE_RATE,
                 device=self.rec_dev_num,
                 channels=1,
                 callback=self.callback,

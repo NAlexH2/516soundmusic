@@ -30,10 +30,6 @@ NOTES_TO_FREQ_DICT = {
 
 # Used for DFT tuner (automatic.py)
 PITCH_CHECK = 440.0
-WINDOW_SIZE = 32768
-WINDOW_SLIDE = 24000
-SLIDE_T = 24000 / SAMPLE_RATE
-SAMPLE_T = 1 / SAMPLE_RATE
 
 
 def termClear():
@@ -54,15 +50,15 @@ def freqDifference(note: str, diff: float) -> str:
             return f"Very close! Too high.\nDifference: {diff}Hz"
 
     if diff < -1:
-        if diff > 10:
+        if diff < -10:
             return f"Tuned way too low! Turn {note} up!\nDifference: {diff}Hz"
-        elif diff > 5:
+        elif diff < -5:
             return f"Still way too low!\nDifference: {diff}Hz"
         elif diff <= 5:
             return f"Almost there! Too low.\nDifference: {diff}Hz"
         else:
             return f"Very close! Too low.\nDifference: {diff}Hz"
-    if diff < 2 and diff > -2:
+    if diff <= 1 and diff >= -1:
         return (
             "\033[32m"
             + f"\nHonestly, close enough!\nDifference: {diff}Hz"
@@ -79,8 +75,8 @@ def noteMenu(ctx: str) -> int:
             opt = int(
                 input(
                     "1: E2\t4: G2\n"
-                    + "2: A3\t\t5: B3\n"
-                    + "3: D3\t\t6: E4\n"
+                    + "2: A3\t5: B3\n"
+                    + "3: D3\t6: E4\n"
                     + "\n0: Exit\n\nOption: "
                 )
             )

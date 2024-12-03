@@ -1,5 +1,6 @@
 import numpy as np
 import os
+from pyaudio import PyAudio
 
 # Used throughout the program
 SAMPLE_RATE = 48000
@@ -89,3 +90,49 @@ def noteMenu(ctx: str) -> int:
             termClear()
             continue
     return int(opt)
+
+
+def selectRecordingDevice():
+    termClear()
+    device_list = dict()
+    p = PyAudio()
+    info = p.get_host_api_info_by_index(host_api_index=0)
+    for i in range(info.get("deviceCount")):
+        if p.get_device_info_by_host_api_device_index(0, i).get(
+            "maxInputChannels"
+        ):
+            devInfo = p.get_device_info_by_host_api_device_index(0, i)
+            iInfo = devInfo.get("index")
+            nInfo = devInfo.get("name")
+            device_list[iInfo] = nInfo
+
+    opt = -1
+    conf = "n"
+    while opt < 1 or opt > len(device_list) or conf != "Y".lower():
+        print(
+            "Select which device to use for live audio processing "
+            "and note comparison: "
+        )
+        try:
+            for d in device_list:
+                print(f"   #{d} - Name: {device_list[d]}")
+            opt = int(input("\nPlease enter which device number to use: "))
+        except ValueError:
+            opt = -1
+            termClear()
+            print("Invalid option...\n")
+            continue
+        if opt not in device_list:
+            opt = -1
+            termClear()
+            print("Invalid option...\n")
+            continue
+        else:
+            print(f"Selected device --> {device_list[opt]}.")
+            conf = input("Is this correct? Y/N: ").lower()
+            if conf != "y":
+                conf = "n"
+                termClear()
+                continue
+
+    return opt, device_list[opt]

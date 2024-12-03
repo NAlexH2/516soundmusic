@@ -9,74 +9,28 @@ class InteractiveDetection:
     def __init__(self) -> None:
         self.rec_dev_num = None
         self.rec_dev_name = None
-        self.rec_dev_channels = None
         self.note = -1
         self.buffer_size = 1024
         self.chunks = SAMPLE_RATE // self.buffer_size
         self.sound = np.empty(
             (self.chunks * self.buffer_size), dtype=np.float32
         )
-
-    def selectRecordingDevice(self):
-        termClear()
-        device_list = dict()
-        p = PyAudio()
-        info = p.get_host_api_info_by_index(host_api_index=0)
-        for i in range(info.get("deviceCount")):
-            if p.get_device_info_by_host_api_device_index(0, i).get(
-                "maxInputChannels"
-            ):
-                devInfo = p.get_device_info_by_host_api_device_index(0, i)
-                iInfo = devInfo.get("index")
-                nInfo = devInfo.get("name")
-                device_list[iInfo] = nInfo
-
-        opt = -1
-        conf = "n"
-        while opt < 1 or opt > len(device_list) or conf != "Y".lower():
-            print(
-                "Select which device to use for live audio processing "
-                "and note comparison: "
-            )
-            try:
-                for d in range(len(device_list)):
-                    print(f"   #{d+1} - Name: {device_list[d]}")
-                opt = int(input("\nPlease enter which device number to use: "))
-            except ValueError:
-                opt = -1
-                termClear()
-                print("Invalid option...\n")
-                continue
-            if opt > len(device_list) or opt < 1:
-                opt = -1
-                termClear()
-                print("Invalid option...\n")
-                continue
-            else:
-                print(f"Selected device --> {device_list[opt-1]}.")
-                conf = input("Is this correct? Y/N: ").lower()
-                if conf != "y":
-                    conf = "n"
-                    termClear()
-                    continue
-
-        self.rec_dev_num = opt - 1
-        self.rec_dev_name = device_list[opt - 1]
-        return
+        self.stream = None
 
     def recAudio(self):
         to_sleep = 2
         print(f"Recording will start in {to_sleep} seconds...")
         sleep(to_sleep)
         print(f"Recording {STANDING_DUR} seconds of audio...")
-        audio = self.stream.read(SAMPLE_RATE * (STANDING_DUR))
+        self.stream.start_stream()
+        audio = self.stream.read(SAMPLE_RATE * STANDING_DUR)
+        self.stream.stop_stream()
         audio = np.frombuffer(audio, dtype=np.float32)
         print(f"\nRecording finished!")
         return audio
 
     def compareNote(self):
         termClear()
-        self.stream.start_stream()
         again = "s"
         test_note = NOTES_DICT.get(self.note)
         test_freq = FREQ_DICT.get(self.note)
@@ -118,11 +72,13 @@ class InteractiveDetection:
         return
 
     def interStart(self):
+        self.rec_dev_num, self.rec_dev_name = selectRecordingDevice()
         opt = -1
         while self.rec_dev_num is None:
             self.selectRecordingDevice()
 
         termClear()
+        print(self.rec_dev_num, self.rec_dev_name)
         while opt == -1:
             context = (
                 f"Using device #{self.rec_dev_num} - {self.rec_dev_name}\n"
@@ -131,7 +87,8 @@ class InteractiveDetection:
             opt = noteMenu(context)
             self.note = opt
             if opt == 0:
-                self.stream.close()
+                if self.stream:
+                    self.stream.close()
                 return
             self.stream = PyAudio().open(
                 format=pyaudio.paFloat32,
@@ -147,6 +104,7 @@ class InteractiveDetection:
                 f"No longer comparing against {NOTES_DICT.get(opt)} "
                 + "note standing wave tone.\n"
             )
-            self.stream.stop_stream()
+            if self.stream.is_active():
+                self.stream.stop_stream()
             opt = -1
             self.note = -1

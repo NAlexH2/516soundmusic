@@ -89,7 +89,7 @@ class InteractiveDetection:
             ).lower()
             if conf == "y":
                 termClear()
-                fft_res = np.fft.fft((self.recAudio()))
+                fft_res = np.fft.fft(self.recAudio())
                 magnitude = np.abs(fft_res)
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
                 positive_mask = freqs > 0

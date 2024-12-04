@@ -104,7 +104,8 @@ def selectRecordingDevice():
             devInfo = p.get_device_info_by_host_api_device_index(0, i)
             iInfo = devInfo.get("index")
             nInfo = devInfo.get("name")
-            device_list[iInfo] = nInfo
+            cInfo = devInfo.get("maxInputChannels")
+            device_list[iInfo] = (nInfo, cInfo)
 
     opt = -1
     conf = "n"
@@ -115,7 +116,9 @@ def selectRecordingDevice():
         )
         try:
             for d in device_list:
-                print(f"   #{d} - Name: {device_list[d]}")
+                print(
+                    f"   #{d} - Name: {device_list[d][0]} -- Channels: {device_list[d][1]}"
+                )
             opt = int(input("\nPlease enter which device number to use: "))
         except ValueError:
             opt = -1
@@ -135,4 +138,4 @@ def selectRecordingDevice():
                 termClear()
                 continue
 
-    return opt, device_list[opt]
+    return opt, device_list[opt][0], device_list[opt][1]

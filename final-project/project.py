@@ -36,47 +36,53 @@ def printOptions():
 
 
 def mainMenu():
-    opt = -1
-    clrs = False
-    sw = standing.StandingWave()
-    interDec = interactive.InteractiveDetection()
-    ad = automatic.AutomaticDetection()
-    while opt < 0 or opt > 3:
-        if clrs == True:
-            pg.termClear()
-            clrs = False
-        if opt < -1 or opt > 3:
-            print(f"**ERROR** --- {opt} is an invalid option!\n")
-            opt = -1
+    try:
+        opt = -1
+        clrs = False
+        sw = standing.StandingWave()
+        interDec = interactive.InteractiveDetection()
+        ad = automatic.AutomaticDetection()
+        while opt < 0 or opt > 3:
+            if clrs == True:
+                pg.termClear()
+                clrs = False
+            if opt < -1 or opt > 3:
+                print(f"**ERROR** --- {opt} is an invalid option!\n")
+                opt = -1
+                clrs = True
+            printOptions()
+            try:
+                opt = int(input())
+            except ValueError:
+                os.system("cls" if os.name == "nt" else "clear")
+                print(f"**ERROR** --- Invalid option!\n")
+                opt = -1
+                continue
+            match opt:
+                case 0:
+                    pg.termClear()
+                    print("\nExiting program. . .")
+                    return
+                case 1:
+                    sw.standingMenu()
+                    opt = -1
+                case 2:
+                    interDec.interStart()
+                    opt = -1
+                case 3:
+                    ad.autoStart()
+                    opt = -1
+                case _:
+                    pass
             clrs = True
-        printOptions()
-        try:
-            opt = int(input())
-        except ValueError:
-            os.system("cls" if os.name == "nt" else "clear")
-            print(f"**ERROR** --- Invalid option!\n")
-            opt = -1
-            continue
-        match opt:
-            case 0:
-                print("\nExiting program. . .")
-                return
-            case 1:
-                sw.standingMenu()
-                opt = -1
-            case 2:
-                interDec.interStart()
-                opt = -1
-            case 3:
-                ad.autoStart()
-                opt = -1
-            case _:
-                pass
-        clrs = True
+    except Exception:
+        if ad.stream and ad.stream.active:
+            ad.stream.stop()
+            ad.stream.close()
 
 
 if __name__ == "__main__":
-    os.system("cls" if os.name == "nt" else "clear")
+    pg.termClear()
     print("---- About this program ----")
     print(
         "This program is designed to give a user the option to tune a \n"

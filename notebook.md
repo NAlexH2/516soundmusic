@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [12/3/24 and 12/4/24 - Working with Bart and solo.](#12324-and-12424---working-with-bart-and-solo)
 - [12/2/24 - 2:00 PM -\> 6:09 PM - Wrapping the project up today... I hope...](#12224---200-pm---609-pm---wrapping-the-project-up-today-i-hope)
 - [12/1/24 - 12:48 PM - About working today...](#12124---1248-pm---about-working-today)
 - [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
@@ -32,6 +33,51 @@ oldest is at the bottom.
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
 
+# 12/3/24 and 12/4/24 - Working with Bart and solo.
+- 12/3/24
+  - Tried to figure out why the automatic was so problematic with Bart
+  - Discovered a million other things...
+    - Issues with device selection
+    - Issues with audio capturing
+    - Issues with sounddevice vs pyaudio
+      - Wound up only using sounddevice
+    - Issues with laptop microphone being absolutely awful so not able to do 
+    a lot of work on it.
+    - Issues with Automatic detection and Interactive
+  - Regarding interactive
+    - It worked when analyzing the dominate frequency, but not the right way to
+    do this step.
+    - Need to look at the first peak and use it as the fundamental. With this, 
+    can then analyze and determine if it's the right choice.
+
+- 12/4/24
+  - Fixed many things I found issues with after speaking with Bart.
+  - Moved everything to sounddevice (soooo much easier!!!)
+  - Streams aren't a thing in the interactive anymore (awesome!)
+  - My laptop microphone is absolutely useless. Not going to do anymore work 
+  with it.
+    - Absolutely garbage tier microphones.
+  - Webcam mic at home is great for this though.
+    - Going to do more coding at home with it.
+  - Fixed menus
+    - Will be replacing with arguments and argparse.
+  - Got the OK from Bart to just put the automatic on pause and get the 
+  interactive working instead.
+    - For the interactive, that's a long term goal. Going to remove it from
+    the options entirely.
+  - For my experience and knowledge even after going through this class, this 
+  is proving to be way harder than I expected for myself.
+  - Addressing the fundamental frequency detection though:
+    - There's ways I'm coming up with to tackle it...
+    - But... The worst way is to hack a function together to parse very 
+    specific ranges of the sample and averaging out those frequencies to see if
+    they are close enough to the expected fundamental one.
+      - Very not ideal...
+    - I'm still brewing up solutions though.
+  - The overall writeup for the project will be in the [final-project/README.md](final-project/README.md)
+  - Going to suspend this work session until I get home. I feel like I'm really 
+  close, just need a decent mic that isn't my garbage laptops setup.
+  
 # 12/2/24 - 2:00 PM -> 6:09 PM - Wrapping the project up today... I hope...
 > We'll see...
 - Found an article that can help move me forward on writing the automatic 

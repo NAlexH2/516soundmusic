@@ -48,10 +48,10 @@ class InteractiveDetection:
                 fft_res = np.fft.fft(self.recAudio())
                 magnitude = np.abs(fft_res)
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
-                positive_mask = (freqs > 50) & (freqs < 400)
-                fund_freq_idx = np.argmax(magnitude[positive_mask])
+                range_mask = (freqs > 50.0) & (freqs < 400.0)
+                fund_freq_idx = None  # TODO FIX
                 # was dom freq, figure out how to find proper freq from range
-                fund_freq = freqs[positive_mask][fund_freq_idx]
+                fund_freq = freqs[range_mask][fund_freq_idx]
                 fund_freq = float("{:.3f}".format(fund_freq))
                 print(f"\nExpected frequency: {test_freq}")
                 print(f"Recored frequency: {fund_freq}")

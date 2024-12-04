@@ -1,7 +1,8 @@
 from time import sleep
 import numpy as np
 import sounddevice as sd
-from .projGlobals import *
+from scipy.io import wavfile
+from projGlobals import *
 
 
 class InteractiveDetection:
@@ -27,6 +28,7 @@ class InteractiveDetection:
             audio = np.mean(a=audio, axis=1, dtype=np.float32)
         audio = np.frombuffer(audio, dtype=np.float32)
         print(f"\nRecording finished!")
+        wavfile.write("tmp.wav", SAMPLE_RATE, audio)
         return audio
 
     def compareNote(self):
@@ -46,17 +48,15 @@ class InteractiveDetection:
                 fft_res = np.fft.fft(self.recAudio())
                 magnitude = np.abs(fft_res)
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
-                positive_mask = freqs > 0
-                dom_freq_idx = np.argmax(magnitude[positive_mask])
-                if test_freq == 82.41:
-                    dom_freq = (freqs[positive_mask][dom_freq_idx]) / 2
-                else:
-                    dom_freq = freqs[positive_mask][dom_freq_idx]
-                dom_freq = float("{:.3f}".format(dom_freq))
+                positive_mask = (freqs > 50) & (freqs < 400)
+                fund_freq_idx = np.argmax(magnitude[positive_mask])
+                # was dom freq, figure out how to find proper freq from range
+                fund_freq = freqs[positive_mask][fund_freq_idx]
+                fund_freq = float("{:.3f}".format(fund_freq))
                 print(f"\nExpected frequency: {test_freq}")
-                print(f"Recored frequency: {dom_freq}")
-                diff_freq = abs(float("{:.3f}".format(test_freq - dom_freq)))
-                if test_freq > dom_freq:
+                print(f"Recored frequency: {fund_freq}")
+                diff_freq = abs(float("{:.3f}".format(test_freq - fund_freq)))
+                if test_freq > fund_freq:
                     diff_freq *= -1
                 print(freqDifference(test_note, diff_freq))
 
@@ -89,6 +89,7 @@ class InteractiveDetection:
             opt = noteMenu(context)
             self.note = opt
             if opt == 0:
+                sd.stop()
                 return
             self.compareNote()
             termClear()
@@ -98,3 +99,9 @@ class InteractiveDetection:
             )
             opt = -1
             self.note = -1
+
+
+if __name__ == "__main__":
+    intd = InteractiveDetection()
+    intd.interStart()
+    exit(0)

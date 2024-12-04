@@ -1,7 +1,6 @@
 from time import sleep
 import numpy as np
-import pyaudio
-from pyaudio import PyAudio, Stream, get_format_from_width
+import sounddevice as sd
 from .projGlobals import *
 
 
@@ -9,22 +8,23 @@ class InteractiveDetection:
     def __init__(self) -> None:
         self.rec_dev_num = None
         self.rec_dev_name = None
+        self.rec_dev_chnls = None
         self.note = -1
-        self.buffer_size = 1024
-        self.chunks = SAMPLE_RATE // self.buffer_size
-        self.sound = np.empty(
-            (self.chunks * self.buffer_size), dtype=np.float32
-        )
-        self.stream = None
 
     def recAudio(self):
         to_sleep = 2
         print(f"Recording will start in {to_sleep} seconds...")
         sleep(to_sleep)
         print(f"Recording {STANDING_DUR} seconds of audio...")
-        self.stream.start_stream()
-        audio = self.stream.read(SAMPLE_RATE * STANDING_DUR)
-        self.stream.stop_stream()
+        audio = sd.rec(
+            frames=SAMPLE_RATE * STANDING_DUR,
+            samplerate=SAMPLE_RATE,
+            channels=self.rec_dev_chnls,
+            dtype=np.float32,
+            blocking=True,
+        )
+        if self.rec_dev_chnls > 1:
+            audio = np.mean(a=audio, axis=1, dtype=np.float32)
         audio = np.frombuffer(audio, dtype=np.float32)
         print(f"\nRecording finished!")
         return audio
@@ -65,14 +65,16 @@ class InteractiveDetection:
             else:
                 termClear()
                 conf = "n"
-                print("Input Error: Only Y or N please...\n")
+                print("Input Error: Only S or D please...\n")
             again = input(
                 "\nRecord same note or a different one? S/D: "
             ).lower()
         return
 
     def interStart(self):
-        self.rec_dev_num, self.rec_dev_name = selectRecordingDevice()
+        self.rec_dev_num, self.rec_dev_name, self.rec_dev_chnls = (
+            selectRecordingDevice()
+        )
         opt = -1
         while self.rec_dev_num is None:
             self.selectRecordingDevice()
@@ -87,24 +89,12 @@ class InteractiveDetection:
             opt = noteMenu(context)
             self.note = opt
             if opt == 0:
-                if self.stream:
-                    self.stream.close()
                 return
-            self.stream = PyAudio().open(
-                format=pyaudio.paFloat32,
-                rate=SAMPLE_RATE,
-                input_device_index=self.rec_dev_num,
-                input=True,
-                channels=1,
-                frames_per_buffer=self.buffer_size,
-            )
             self.compareNote()
             termClear()
             print(
                 f"No longer comparing against {NOTES_DICT.get(opt)} "
                 + "note standing wave tone.\n"
             )
-            if self.stream.is_active():
-                self.stream.stop_stream()
             opt = -1
             self.note = -1

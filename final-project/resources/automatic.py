@@ -9,12 +9,14 @@ FFT_LEN = 4096
 class AutomaticDetection:
 
     def __init__(self):
+        self.stream = None
         self.dom_freq = 0.0
         self.notes = list(NOTES_DICT.values())
         self.nearest_note = ""
         self.nearest_pitch = ""
         self.rec_dev_num = None
         self.rec_dev_name = None
+        self.rec_dev_chnls = None
         self.buffer = np.array([], dtype=np.float64)
         self.frames_processed = 0
 
@@ -27,6 +29,8 @@ class AutomaticDetection:
 
     def callback(self, inputD: np.ndarray, frames, dur, state):
         if any(inputD):
+            if self.rec_dev_chnls > 1:
+                inputD = np.mean(a=inputD, axis=1, dtype=np.float32)
             if len(self.buffer) >= FFT_LEN + frames:
                 self.buffer = self.buffer[frames:]
             self.buffer = np.append(self.buffer, inputD.flatten())
@@ -64,21 +68,21 @@ class AutomaticDetection:
 
     def autoStart(self):
         termClear()
-        self.rec_dev_num, self.rec_dev_name = selectRecordingDevice()
+        self.rec_dev_num, self.rec_dev_name, self.rec_dev_chnls = (
+            selectRecordingDevice()
+        )
         try:
-            stream = sd.InputStream(
+            self.stream = sd.InputStream(
                 samplerate=SAMPLE_RATE,
                 blocksize=64,
                 device=self.rec_dev_num,
-                channels=1,
+                channels=self.rec_dev_chnls,
                 callback=self.callback,
             )
-            stream.start()
+            self.stream.start()
             sd.wait()
         except KeyboardInterrupt:
+            if self.stream and self.stream.active:
+                self.stream.stop()
+                self.stream.close()
             return
-
-
-if __name__ == "__main__":
-    ad = AutomaticDetection()
-    ad.autoStart()

@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [12/5/2024](#1252024)
 - [12/3/24 and 12/4/24 - Working with Bart and solo.](#12324-and-12424---working-with-bart-and-solo)
   - [12/3/24 - with Bart](#12324---with-bart)
   - [12/4/24 - with Bart/Solo](#12424---with-bartsolo)
@@ -36,6 +37,16 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# 12/5/2024
+- Argparse added to a forked branch and tested.
+- Cleaned up code.
+- Tested all options and over tuned and under tuned strings on guitar.
+  - All tests passed with satisfaction.
+  - There is an issue where if a string is ***very*** out of tune, it won't 
+  detect the fundamental frequency properly. But this is HIGHLY irregular, and 
+  I cannot stress how *bad* the string must be tuned to be incorrect.
+- Next step, the writeup.
 
 # 12/3/24 and 12/4/24 - Working with Bart and solo.
 ## 12/3/24 - with Bart

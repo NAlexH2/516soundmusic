@@ -5,6 +5,7 @@
   - [12/3/24 - with Bart](#12324---with-bart)
   - [12/4/24 - with Bart/Solo](#12424---with-bartsolo)
   - [12/4/24 - 3PM](#12424---3pm)
+  - [12/4/24 - 7PM](#12424---7pm)
 - [12/2/24 - 2:00 PM -\> 6:09 PM - Wrapping the project up today... I hope...](#12224---200-pm---609-pm---wrapping-the-project-up-today-i-hope)
 - [12/1/24 - 12:48 PM - About working today...](#12124---1248-pm---about-working-today)
 - [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
@@ -95,6 +96,11 @@ Table of contents are generated using a VSCode extension called
   returned object just right for each chord (mostly ignoring noisy neighbor 
   peaks) I feel super confident in what I have.
     - It will committed in a following commit after I commit these notes.
+  
+## 12/4/24 - 7PM
+  - That prev commit mentioned went out. Cleaned up some stuff. 
+  Not quite done. Going to do some argparsing stuff tomorrow and getting that
+  ball rolling.
   
 # 12/2/24 - 2:00 PM -> 6:09 PM - Wrapping the project up today... I hope...
 > We'll see...

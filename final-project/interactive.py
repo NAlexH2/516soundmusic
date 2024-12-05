@@ -39,17 +39,21 @@ class InteractiveDetection:
         range_mask = (freqs > 50.0) & (freqs < 400.0)
         filtered_freqs = freqs[range_mask]
         filtered_magnitude = magnitude[range_mask]
+
+        # Where the magic happens
         peaks, _ = signal.find_peaks(
             x=filtered_magnitude,
             height=100,  # Minimum peak height
             distance=200,  # Minimum distance between peaks
             prominence=100,  # Minimum prominence of peaks
         )
+        # This returns a python list of peaks it found meeting these minimum
+        # characteristics.
 
         # set some defaults for the next step
         fund_freq_idx = 0
 
-        # None used if no peaks found (no significant audio recorded)
+        # None used if no peaks found (no significant audio detected)
         fund_freq = None
         if len(peaks) > 0:
             fund_freq_idx = peaks[0]

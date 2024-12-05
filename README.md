@@ -15,5 +15,5 @@
 ### Link to [HW1 - Clipped](code/hw1-clipped/)
 ### Link to [HW2 - Adaptive](code/hw2-adaptive/)
 ### Link to [HW3 - Popgen](code/hw3-popgen/)
-### Link to [Final Project](code/final-project/)
+### Link to [Final Project](final-project/)
 

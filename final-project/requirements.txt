@@ -3,4 +3,3 @@ sounddevice
 numpy
 librosa
 matplotlib
-pyaudio

@@ -14,15 +14,7 @@ global_fade_out = np.linspace(1, 0, fade_samples)
 
 class StandingWave:
     def __init__(self):
-        # Create sine waves here. Reduce amplitude so it's not super loud
-        # first play by user.
-
-        self.E2 = self.apply_fade(self.buildNote(E2_FREQ))
-        self.A2 = self.apply_fade(self.buildNote(A2_FREQ))
-        self.D3 = self.apply_fade(self.buildNote(D3_FREQ))
-        self.G3 = self.apply_fade(self.buildNote(G3_FREQ))
-        self.B3 = self.apply_fade(self.buildNote(B3_FREQ))
-        self.E4 = self.apply_fade(self.buildNote(E4_FREQ))
+        self.tone = None
 
     # Fade notes so they don't have popping on loop.
     def apply_fade(self, note: np.ndarray):
@@ -40,7 +32,7 @@ class StandingWave:
         return note
 
     def buildNote(self, freq):
-        if freq != E4_FREQ:
+        if freq != NOTES_TO_FREQ_DICT["E4"]:
             note = 0.05 * np.sin(2 * np.pi * freq * T_SPACE)
         else:
             note = 0.2 * np.sin(2 * np.pi * freq * T_SPACE)
@@ -49,51 +41,28 @@ class StandingWave:
         return note
 
     def secondHarmonic(self, freq):
-        if freq != E4_FREQ:
+        if freq != NOTES_TO_FREQ_DICT["E4"]:
             return 0.1 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
         else:
             return 0.04 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
 
     def thirdHarmonic(self, freq):
-        if freq != E4_FREQ:
+        if freq != NOTES_TO_FREQ_DICT["E4"]:
             return 0.05 * np.sin(2 * np.pi * (3 * freq) * T_SPACE)
         else:
             return 0.04 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
 
-    def standingMenu(self):
+    def standingStart(self, note):
         termClear()
-        while True:
-            ctx = "Pick which note to generate a standing wave form of.\n"
-            opt = noteMenu(ctx)
-            if opt != 0:
-                print(
-                    f"\nNow listening to {NOTES_DICT.get(opt)} "
-                    + "note standing wave tone."
-                )
-                print("Press Ctrl+C to stop listening.")
-            try:
-                match opt:
-                    case 1:
-                        sd.play(data=self.E2, samplerate=SAMPLE_RATE, loop=True)
-                    case 2:
-                        sd.play(data=self.A2, samplerate=SAMPLE_RATE, loop=True)
-                    case 3:
-                        sd.play(data=self.D3, samplerate=SAMPLE_RATE, loop=True)
-                    case 4:
-                        sd.play(data=self.G3, samplerate=SAMPLE_RATE, loop=True)
-                    case 5:
-                        sd.play(data=self.B3, samplerate=SAMPLE_RATE, loop=True)
-                    case 6:
-                        sd.play(data=self.E4, samplerate=SAMPLE_RATE, loop=True)
-                    case 0:
-                        return
-                while True:
-                    pass
-            except KeyboardInterrupt:
-                sd.stop()
-                termClear()
-                print(
-                    f"No longer listening to {NOTES_DICT.get(opt)} "
-                    + "note standing wave tone.\n"
-                )
-                opt = -1
+        self.tone = self.apply_fade(self.buildNote(NOTES_TO_FREQ_DICT[note]))
+        try:
+            print(f"\nNow listening to {note} " + "note standing wave tone.")
+            print("Press Ctrl+C to stop listening.")
+
+            sd.play(data=self.tone, samplerate=SAMPLE_RATE, loop=True)
+            while True:
+                pass
+        except KeyboardInterrupt:
+            sd.stop()
+            print(f"No longer listening to {note} note standing wave tone.\n")
+            opt = -1

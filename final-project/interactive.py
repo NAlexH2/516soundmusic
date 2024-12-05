@@ -10,7 +10,7 @@ class InteractiveDetection:
         self.rec_dev_num = None
         self.rec_dev_name = None
         self.rec_dev_chnls = None
-        self.note = -1
+        self.note = None
 
     def recAudio(self):
         to_sleep = 2
@@ -32,8 +32,7 @@ class InteractiveDetection:
         return audio
 
     def compareNote(self):
-        test_note = NOTES_DICT.get(self.note)
-        test_freq = FREQ_DICT.get(self.note)
+        test_freq = NOTES_TO_FREQ_DICT.get(self.note)
         fft_res = np.fft.fft(self.recAudio())
         magnitude = np.abs(fft_res)
         freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)
@@ -64,7 +63,7 @@ class InteractiveDetection:
             diff_freq = abs(float("{:.3f}".format(test_freq - fund_freq)))
             if test_freq > fund_freq:
                 diff_freq *= -1
-            print(freqDifference(test_note, diff_freq), "\n")
+            print(freqDifference(self.note, diff_freq), "\n")
 
         # no peaks found therefor no fund_freq set (fund_freq == None)
         else:
@@ -72,23 +71,18 @@ class InteractiveDetection:
 
         return
 
-    def interStart(self):
-        self.rec_dev_num, self.rec_dev_name, self.rec_dev_chnls = (
-            selectRecordingDevice()
+    def interStart(
+        self,
+        note,
+        device_idx,
+    ):
+        self.rec_dev_num, self.rec_dev_name, self.rec_dev_chnls = getDeviceInfo(
+            device_idx
         )
         sd.default.device = self.rec_dev_num
         sd.default.samplerate = SAMPLE_RATE
         termClear()
-        while self.note != 0:
-            context = (
-                f"Using device #{self.rec_dev_num} - {self.rec_dev_name}\n"
-                + "Which note will you be tuning for?"
-            )
-            self.note = noteMenu(context)
-            print(f"\nTuning for {NOTES_DICT.get(self.note)} note.\n")
-            if self.note == 0:
-                sd.stop()
-                return
-            self.compareNote()
-            print("------------------")
-            self.note = -1
+        self.note = note
+        print(f"\nTuning for {self.note} note.\n")
+        self.compareNote()
+        return

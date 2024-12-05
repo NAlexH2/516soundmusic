@@ -44,7 +44,7 @@ class InteractiveDetection:
                 "\nRecord? Y/N: "
             ).lower()
             if conf == "y":
-                # termClear()
+                termClear()
                 fft_res = np.fft.fft(self.recAudio())
                 magnitude = np.abs(fft_res)
                 freqs = np.fft.fftfreq(fft_res.size, 1 / SAMPLE_RATE)

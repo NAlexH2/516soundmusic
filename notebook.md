@@ -10,7 +10,7 @@
 - [12/2/24 - 2:00 PM -\> 6:09 PM - Wrapping the project up today... I hope...](#12224---200-pm---609-pm---wrapping-the-project-up-today-i-hope)
 - [12/1/24 - 12:48 PM - About working today...](#12124---1248-pm---about-working-today)
 - [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
-- [11/26/24 - 2:20PM -\> 6:00PM - Setup and Work On Final Portfolio Objective](#112624---220pm---600pm---setup-and-work-on-final-portfolio-objective)
+- [11/26/24 - 2:20PM -\> 6:00PM - HW3 Start to Finish](#112624---220pm---600pm---hw3-start-to-finish)
   - [Commence working notes here:](#commence-working-notes-here)
     - [Personal side note and feelings going through the class](#personal-side-note-and-feelings-going-through-the-class)
   - [What else?](#what-else)
@@ -198,7 +198,7 @@ the start or the end.
 - I am **very** happy with how todays progress went and will get started on the
 final one soon - if not tomorrow (12/01/24). We'll see.
 
-# 11/26/24 - 2:20PM -> 6:00PM - Setup and Work On Final Portfolio Objective
+# 11/26/24 - 2:20PM -> 6:00PM - HW3 Start to Finish
 - Link to the [portfolio objective folder here](code/hw3-popgen).
 - Finished setting up for the final portfolio objective.
 - Will be working on it and adding comments regarding work done here.
@@ -259,6 +259,7 @@ at the top of these notes.
   **WARNING**: This is semi-high pitched, but no where near deafening. Keep your 
   volume just a tad low so you're not shocked by it.
 
+- This portfolio objective is complete.
 
 # 11/18/24 1:40AM - Final Project Touchups/Verify Windows Install
 - Had to reformat PC for a growing number of reasons

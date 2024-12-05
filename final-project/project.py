@@ -26,11 +26,6 @@ def printOptions():
         "2 - Interactive Detection - Pick a note, play and record the note, then\n"
         + "    see how correct its pitch is.\n"
     )
-    print(
-        "3 - Automatic Detection - Play any note, and this will automatically \n"
-        + "    tell you how close the pitch is and which note you are trying to tune."
-        + "\n"
-    )
     print("0 - Closes this program.\n")
     print("Option:", end=" ")
 

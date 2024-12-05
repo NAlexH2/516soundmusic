@@ -1,6 +1,7 @@
 # Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
+- [Writeup for Final Project](#writeup-for-final-project)
 - [12/5/2024](#1252024)
 - [12/3/24 and 12/4/24 - Working with Bart and solo.](#12324-and-12424---working-with-bart-and-solo)
   - [12/3/24 - with Bart](#12324---with-bart)
@@ -37,6 +38,10 @@ oldest is at the bottom.
 
 Table of contents are generated using a VSCode extension called 
 "Markdown All In One." Very useful tool.
+
+# Writeup for Final Project
+The writeup for the final project can be found in the projects README.md. 
+[Here is a nice little link to get to it.](/final-project/README.md#writeup---experience-lessons-learned-future-work)
 
 # 12/5/2024
 - Argparse added to a forked branch and tested.

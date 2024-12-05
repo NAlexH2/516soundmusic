@@ -2,6 +2,9 @@
 - [Table of Contents](#table-of-contents)
 - [Note to reader](#note-to-reader)
 - [12/3/24 and 12/4/24 - Working with Bart and solo.](#12324-and-12424---working-with-bart-and-solo)
+  - [12/3/24 - with Bart](#12324---with-bart)
+  - [12/4/24 - with Bart/Solo](#12424---with-bartsolo)
+  - [12/4/24 - 3PM](#12424---3pm)
 - [12/2/24 - 2:00 PM -\> 6:09 PM - Wrapping the project up today... I hope...](#12224---200-pm---609-pm---wrapping-the-project-up-today-i-hope)
 - [12/1/24 - 12:48 PM - About working today...](#12124---1248-pm---about-working-today)
 - [11/30/24 - 9:32 AM - Working on Final Project](#113024---932-am---working-on-final-project)
@@ -34,7 +37,7 @@ Table of contents are generated using a VSCode extension called
 "Markdown All In One." Very useful tool.
 
 # 12/3/24 and 12/4/24 - Working with Bart and solo.
-- 12/3/24
+## 12/3/24 - with Bart
   - Tried to figure out why the automatic was so problematic with Bart
   - Discovered a million other things...
     - Issues with device selection
@@ -50,7 +53,7 @@ Table of contents are generated using a VSCode extension called
     - Need to look at the first peak and use it as the fundamental. With this, 
     can then analyze and determine if it's the right choice.
 
-- 12/4/24
+## 12/4/24 - with Bart/Solo
   - Fixed many things I found issues with after speaking with Bart.
   - Moved everything to sounddevice (soooo much easier!!!)
   - Streams aren't a thing in the interactive anymore (awesome!)
@@ -77,6 +80,21 @@ Table of contents are generated using a VSCode extension called
   - The overall writeup for the project will be in the [final-project/README.md](final-project/README.md)
   - Going to suspend this work session until I get home. I feel like I'm really 
   close, just need a decent mic that isn't my garbage laptops setup.
+
+## 12/4/24 - 3PM
+  - Discovered that the fender tuner app on my phone doesn't produce a high 
+  enough quality of any note for the microphone to pick it up properly...
+    - I've been banging my head against a wall I constructed...
+    - With my guitar at my house, played, recorded, saved, and analyzed and the 
+    first peak IS the correct frequency, note, everything!!!!
+  - Also learned that sound device lists EVERY possible configuration of a 
+  device and had to figure out which one would be the best option for the user
+  to read/pick from (even when I put argparse in)
+  - Doing a bit more digging and Bart telling me it was a peaks issue, I have
+  spent several hours playing with `scipy.signal.find_peaks()` to get the peaks 
+  returned object just right for each chord (mostly ignoring noisy neighbor 
+  peaks) I feel super confident in what I have.
+    - It will committed in a following commit after I commit these notes.
   
 # 12/2/24 - 2:00 PM -> 6:09 PM - Wrapping the project up today... I hope...
 > We'll see...

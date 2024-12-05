@@ -2,7 +2,7 @@ from time import sleep
 import numpy as np
 import sounddevice as sd
 import scipy.signal as signal
-from .projGlobals import *
+from projGlobals import *
 
 
 class InteractiveDetection:

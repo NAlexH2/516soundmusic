@@ -1,6 +1,6 @@
 import numpy as np
 import sounddevice as sd
-from .projGlobals import *
+from projGlobals import *
 
 # Number of samples per FFT. Should be a power of 2.
 FFT_LEN = 4096

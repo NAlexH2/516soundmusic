@@ -1,6 +1,6 @@
 import numpy as np
 import os
-from pyaudio import PyAudio
+import sounddevice as sd
 
 # Used throughout the program
 SAMPLE_RATE = 48000
@@ -95,21 +95,16 @@ def noteMenu(ctx: str) -> int:
 def selectRecordingDevice():
     termClear()
     device_list = dict()
-    p = PyAudio()
-    info = p.get_host_api_info_by_index(host_api_index=0)
-    for i in range(info.get("deviceCount")):
-        if p.get_device_info_by_host_api_device_index(0, i).get(
-            "maxInputChannels"
-        ):
-            devInfo = p.get_device_info_by_host_api_device_index(0, i)
-            iInfo = devInfo.get("index")
-            nInfo = devInfo.get("name")
-            cInfo = devInfo.get("maxInputChannels")
+    for device in sd.query_devices():
+        if device["max_input_channels"] > 1 and device["hostapi"] == 0:
+            iInfo = device["index"]
+            nInfo = device["name"]
+            cInfo = device["max_input_channels"]
             device_list[iInfo] = (nInfo, cInfo)
 
     opt = -1
     conf = "n"
-    while opt < 1 or opt > len(device_list) or conf != "Y".lower():
+    while opt not in device_list or conf != "Y".lower():
         print(
             "Select which device to use for live audio processing "
             "and note comparison: "

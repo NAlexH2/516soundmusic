@@ -1,6 +1,6 @@
 import numpy as np
 import sounddevice as sd
-from .projGlobals import *
+from projGlobals import *
 
 
 # Define how long we want the fade to be, then generate those samples
@@ -41,24 +41,24 @@ class StandingWave:
 
     def buildNote(self, freq):
         if freq != E4_FREQ:
-            note = 0.05 * np.sin(2 * np.pi * freq * T)
+            note = 0.05 * np.sin(2 * np.pi * freq * T_SPACE)
         else:
-            note = 0.2 * np.sin(2 * np.pi * freq * T)
+            note = 0.2 * np.sin(2 * np.pi * freq * T_SPACE)
         note += self.secondHarmonic(freq)
         note += self.thirdHarmonic(freq)
         return note
 
     def secondHarmonic(self, freq):
         if freq != E4_FREQ:
-            return 0.1 * np.sin(2 * np.pi * (2 * freq) * T)
+            return 0.1 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
         else:
-            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T)
+            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
 
     def thirdHarmonic(self, freq):
         if freq != E4_FREQ:
-            return 0.05 * np.sin(2 * np.pi * (3 * freq) * T)
+            return 0.05 * np.sin(2 * np.pi * (3 * freq) * T_SPACE)
         else:
-            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T)
+            return 0.04 * np.sin(2 * np.pi * (2 * freq) * T_SPACE)
 
     def standingMenu(self):
         termClear()

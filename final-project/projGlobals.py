@@ -4,10 +4,9 @@ import sounddevice as sd
 
 # Used throughout the program
 SAMPLE_RATE = 48000
-MAX16 = 32767
 STANDING_DUR = 3
-T = np.int16
-T = np.linspace(
+T_SPACE = np.int16
+T_SPACE = np.linspace(
     0, STANDING_DUR, int(SAMPLE_RATE * STANDING_DUR), endpoint=False
 )
 E2_FREQ = 82.41  # low E string on guitar (E2)

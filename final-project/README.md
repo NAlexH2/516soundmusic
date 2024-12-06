@@ -2,6 +2,7 @@
 - [Table of Contents](#table-of-contents)
 - [Python Version](#python-version)
     - [**This project absolutely requires Python 3.10 or newer!**](#this-project-absolutely-requires-python-310-or-newer)
+- [To Bart Massey at Portland State University](#to-bart-massey-at-portland-state-university)
 - [About This Project](#about-this-project)
 - [How to Run](#how-to-run)
 - [Writeup - Experience, Lessons Learned, Future Work](#writeup---experience-lessons-learned-future-work)
@@ -22,6 +23,9 @@
 
 # Python Version
 ### **This project absolutely requires Python 3.10 or newer!**
+
+# To Bart Massey at Portland State University
+Given the project is open source anyone can take it, but you asked me to explicitly state you can use the code and images to show off how a DFT tuner works. I would just say, don't stop students from doing this project, and not include it in the class repo. Feel free to improve it too.
 
 # About This Project
 This project is 2 different types of guitar tuners.
